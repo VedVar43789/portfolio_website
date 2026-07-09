@@ -197,6 +197,7 @@ const PROJECTS_RAW: Project[] = [
     description:
       "Mentored full-stack environmental intelligence platform predicting invasive plant species risk. Combined map-based scanning with a hybrid ML risk engine (climate similarity, aggression traits, invasion history). Won DS3 showcase recognition.",
     stack: ["React", "Mapbox", "FastAPI", "FAISS", "Open-Meteo", "GBIF"],
+    github: "https://github.com/VedVar43789/InvasiveSpeciesTracker",
     demo: "https://invasive-watch.vercel.app",
     tags: ["ml", "dataviz", "api", "backend"],
     sortKey: 202603,
@@ -207,6 +208,7 @@ const PROJECTS_RAW: Project[] = [
     description:
       "Fine-tuned ImageNet-pretrained ResNet18 with a 6-class head to predict Southern California cities from street photos. End-to-end training workflow with checkpointing and deployable inference.",
     stack: ["Python", "PyTorch", "ResNet18", "Computer Vision"],
+    github: "https://github.com/VedVar43789/SoCal-Guessr",
     tags: ["ml", "cv"],
     sortKey: 202602,
   },
@@ -236,6 +238,7 @@ const PROJECTS_RAW: Project[] = [
     description:
       "Streamlit app suggesting recipes from text or pantry photos via EfficientNetB0 ingredient detection, fuzzy matching, and nutrition-aware ranking. Won Best Project at DS3 Fall 2025 showcase.",
     stack: ["Python", "PyTorch", "EfficientNetB0", "OpenCV", "Streamlit"],
+    github: "https://github.com/VedVar43789/PantryPal",
     demo: "https://pantrypalucsd.streamlit.app/",
     tags: ["ml", "cv", "streamlit", "recsys", "api"],
     sortKey: 202512,
@@ -246,6 +249,7 @@ const PROJECTS_RAW: Project[] = [
     description:
       "ML dashboard predicting sustained YouTube virality with Random Forest and Kaplan-Meier survival curves. Automated daily YouTube Data API pulls. 3rd place at DS3 Fall 2025 showcase.",
     stack: ["Python", "scikit-learn", "YouTube Data API", "Streamlit", "lifelines"],
+    github: "https://github.com/VedVar43789/TubeScope",
     demo: "https://tubescopeds3.streamlit.app/",
     tags: ["ml", "streamlit", "dataviz", "timeseries", "api"],
     sortKey: 202512,
@@ -256,6 +260,7 @@ const PROJECTS_RAW: Project[] = [
     description:
       "Interactive D3.js earthquake visualization exploring how infrastructure resilience shapes outcomes. Won Best Project & People's Choice among 42 teams in DSC 106.",
     stack: ["JavaScript", "D3.js", "TopoJSON"],
+    github: "https://github.com/VedVar43789/earthquakes",
     demo: "https://vedvar43789.github.io/earthquakes/",
     tags: ["dataviz"],
     sortKey: 202506,
@@ -266,6 +271,8 @@ const PROJECTS_RAW: Project[] = [
     description:
       "Power outage prediction with end-to-end ML pipeline. Optimized Random Forest via GridSearchCV with 74.3% accuracy.",
     stack: ["Python", "Scikit-learn", "Random Forest", "GridSearchCV"],
+    github: "https://github.com/VedVar43789/watts-the-problem",
+    demo: "https://vedvar43789.github.io/watts-the-problem/",
     tags: ["ml"],
     sortKey: 202503,
   },
@@ -285,6 +292,8 @@ const PROJECTS_RAW: Project[] = [
     description:
       "Student finance app with 100+ active UCSD users for budgeting, expense tracking, and social spending insights.",
     stack: ["React Native", "Node.js", "PostgreSQL"],
+    github: "https://github.com/CSES-Open-Source/TritonSpend",
+    demo: "https://tritonspend.netlify.app",
     tags: ["backend", "api"],
     sortKey: 202411,
   },
