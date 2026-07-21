@@ -1,4 +1,4 @@
-import { Github, ExternalLink, GraduationCap, MapPin, Mail, Linkedin, Send, ChevronsRight, Sparkles, Star, Briefcase, FlaskConical, Users } from "lucide-react";
+import { Github, ExternalLink, GraduationCap, MapPin, Mail, Linkedin, Send, Star, Briefcase, FlaskConical, Users } from "lucide-react";
 import { EXPERIENCE, EXPERIENCE_GROUPS, PROJECTS, PROJECT_FILTERS, SKILLS, LINKS, EDUCATION, ABOUT } from "./data";
 import type { Experience as ExperienceItem, ExperienceGroupId } from "./data";
 import { Reveal } from "./Reveal";
@@ -72,12 +72,12 @@ const EXPERIENCE_LOGO_OVERRIDES: Record<string, string> = {
   UniCircle: "unicircle",
   "UCSD CSE (STSLab)": "cse",
   "Engineers for Exploration (E4E)": "e4e",
-  "PwC India": "pwc",
+  "PricewaterhouseCoopers LLP (PwC)": "pwc-2",
   "DS3, Data Science Student Society": "ds3",
   "Halicioglu Data Science Institute, UCSD": "hdsi",
   "CSES Open Source, TritonSpend": "cses",
   "Triton Quantitative Trading (TQT)": "tqt",
-  "IIT Guwahati": "iitg_logo",
+  "IIT Guwahati": "IITG_logo",
 };
 
 const EXPERIENCE_GROUP_ICONS: Record<ExperienceGroupId, typeof Briefcase> = {
@@ -158,168 +158,211 @@ export function Education() {
   );
 }
 
-function ExperienceCard({ e, idx, logoSrc, anchor }: { e: ExperienceItem; idx: number; logoSrc?: string; anchor: string }) {
+function ExperienceCard({
+  e,
+  idx,
+  logoSrc,
+  anchor,
+  isLast,
+}: {
+  e: ExperienceItem;
+  idx: number;
+  logoSrc?: string;
+  anchor: string;
+  isLast: boolean;
+}) {
   const isFeatured = Boolean(e.featured);
+
   return (
-    <Reveal delay={idx * 60} className="h-full">
-      <div
-        id={anchor}
-        className={`card-hover h-full rounded-xl p-6 ${
-          isFeatured
-            ? "border border-amber-300/50 bg-gradient-to-br from-amber-200/10 via-card/85 to-primary/10 shadow-[0_12px_35px_-20px_rgba(251,191,36,0.65)]"
-            : "glass"
-        } scroll-mt-28`}
-      >
-        <p className={`text-xs font-medium ${isFeatured ? "text-amber-300" : "text-primary"}`}>{e.period}</p>
-        <div className="mt-1 flex items-start gap-3">
-          {logoSrc && (
-            <img
-              src={logoSrc}
-              alt={`${e.company} logo`}
-              className="h-9 w-9 rounded-md border border-border/70 object-contain bg-background/70 p-1"
-              loading="lazy"
-            />
-          )}
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <h3 className="font-display text-lg font-semibold">{e.role}</h3>
-              {isFeatured && <Star size={14} className="fill-amber-300 text-amber-300" aria-label="Featured role" />}
-            </div>
-            <p className="text-primary text-sm font-medium mt-0.5">{e.company}</p>
-          </div>
-        </div>
-        {e.meta && <p className="text-xs text-muted-foreground mt-1">{e.meta}</p>}
-        {e.location && <p className="text-xs text-muted-foreground mt-0.5">{e.location}</p>}
-        <p className="mt-3 text-sm text-muted-foreground">{e.description}</p>
-        {e.progression && e.progression.length > 0 && (
-          <div className="mt-4 rounded-lg border border-border/70 bg-background/30 p-3">
-            <p className="text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
-              Career Progression
-            </p>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              {e.progression.map((step, i) => (
-                <div key={`${step.role}-${step.period}`} className="contents">
-                  <div
-                    className={`rounded-md border px-2.5 py-1.5 text-xs ${
-                      step.current
-                        ? "border-primary/70 bg-primary/15 text-foreground"
-                        : "border-border/70 bg-background/55 text-muted-foreground"
-                    }`}
-                  >
-                    <p className="font-medium">{step.role}</p>
-                    <p className="text-[11px] opacity-80">{step.period}</p>
-                  </div>
-                  {e.progression && i < e.progression.length - 1 && <ChevronsRight size={14} className="text-primary/60" />}
+    <Reveal delay={idx * 50}>
+      <article id={anchor} className="relative scroll-mt-28 pl-8 md:pl-10">
+        <span
+          className={`absolute left-0 top-6 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-background ${
+            isFeatured ? "bg-amber-300 shadow-[0_0_0_4px_rgba(251,191,36,0.25)]" : "bg-primary shadow-[0_0_0_4px_var(--background)]"
+          }`}
+          aria-hidden
+        />
+        {!isLast && (
+          <span className="absolute left-0 top-9 bottom-0 w-px -translate-x-1/2 bg-border" aria-hidden />
+        )}
+
+        <div
+          className={`card-hover rounded-2xl p-5 md:p-6 ${
+            isFeatured
+              ? "border border-amber-300/45 bg-gradient-to-br from-amber-200/10 via-card/85 to-primary/10"
+              : "glass"
+          }`}
+        >
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex min-w-0 items-start gap-3.5">
+              {logoSrc ? (
+                <img
+                  src={logoSrc}
+                  alt={`${e.company} logo`}
+                  className="h-11 w-11 shrink-0 rounded-xl border border-border/70 bg-background/70 object-contain p-1.5"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
+                  <Briefcase size={18} />
                 </div>
+              )}
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="font-display text-lg font-semibold leading-snug text-foreground">{e.role}</h3>
+                  {isFeatured && (
+                    <span className="inline-flex items-center gap-1 rounded-full border border-amber-300/50 bg-amber-200/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-200">
+                      <Star size={10} className="fill-amber-200 text-amber-200" aria-hidden />
+                      Featured
+                    </span>
+                  )}
+                </div>
+                <p className="mt-0.5 text-sm font-medium text-primary">{e.company}</p>
+                {(e.location || e.meta) && (
+                  <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                    {e.location && (
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin size={12} className="shrink-0" />
+                        {e.location}
+                      </span>
+                    )}
+                    {e.meta && <span>{e.meta}</span>}
+                  </p>
+                )}
+              </div>
+            </div>
+            <p
+              className={`shrink-0 text-xs font-semibold sm:text-right ${
+                isFeatured ? "text-amber-200" : "text-primary"
+              }`}
+            >
+              {e.period}
+            </p>
+          </div>
+
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{e.description}</p>
+
+          {e.progression && e.progression.length > 0 && (
+            <div className="mt-5 rounded-xl border border-border/70 bg-background/35 p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">Career progression</p>
+              <ol className="mt-3 space-y-3">
+                {e.progression.map((step) => (
+                  <li key={`${step.role}-${step.period}`} className="flex gap-3">
+                    <span
+                      className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${
+                        step.current ? "bg-primary ring-2 ring-primary/30" : "bg-muted-foreground/40"
+                      }`}
+                      aria-hidden
+                    />
+                    <div className="min-w-0">
+                      <p className={`text-sm font-medium ${step.current ? "text-foreground" : "text-muted-foreground"}`}>
+                        {step.role}
+                      </p>
+                      <p className="text-xs text-muted-foreground">{step.period}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
+          {e.tags && e.tags.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-2 border-t border-border/60 pt-4">
+              {e.tags.map((t) => (
+                <span key={t} className="skill-pill">
+                  {t}
+                </span>
               ))}
             </div>
-          </div>
-        )}
-        {e.tags && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {e.tags.map((t) => (
-              <span key={t} className="skill-pill">{t}</span>
-            ))}
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </article>
     </Reveal>
   );
 }
 
 export function Experience() {
+  const [activeGroup, setActiveGroup] = useState<ExperienceGroupId>("industry");
+
   const getExperienceLogo = (company: string, role: string) => {
     const overrideName = EXPERIENCE_LOGO_OVERRIDES[company];
     if (overrideName) {
       const overrideAsset = getAssetByFileName(overrideName);
       if (overrideAsset) return overrideAsset;
     }
-    return findBestAsset(company, [role, "logo", "company"]);
+    return findBestAsset(company, [role]);
   };
   const getExperienceAnchor = (role: string, company: string, idx: number) =>
     `experience-${idx}-${normalizeAssetKey(`${role}-${company}`).replace(/\s+/g, "-")}`;
 
-  const indexedExperience = EXPERIENCE.map((e, idx) => ({ e, idx }));
-  const featuredRoles = indexedExperience.filter((row) => row.e.featured);
   const groupedExperience = EXPERIENCE_GROUPS.map((g) => ({
     ...g,
-    items: indexedExperience.filter((row) => row.e.group === g.id),
+    items: EXPERIENCE.map((e, idx) => ({ e, idx }))
+      .filter((row) => row.e.group === g.id)
+      .sort((a, b) => b.e.sortKey - a.e.sortKey),
   }));
+  const activeSection = groupedExperience.find((g) => g.id === activeGroup) ?? groupedExperience[0];
 
   return (
     <section id="experience" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-4xl px-6">
         <SectionHeader
           eyebrow="Experience"
-          title="Where I've worked"
-          subtitle="Industry roles, research, and campus leadership — most recent first in each."
+          title="Work & Research"
+          subtitle="Industry, research, and campus leadership — grouped for quick scanning."
         />
 
-        {featuredRoles.length > 0 && (
-          <Reveal className="mb-10">
-            <div className="relative overflow-hidden rounded-2xl border border-primary/45 bg-gradient-to-br from-primary/12 via-card/70 to-cyan/10 p-5 shadow-[0_18px_45px_-24px_var(--glow)] md:p-6">
-              <div className="pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full bg-primary/20 blur-3xl" aria-hidden />
-              <div className="pointer-events-none absolute -left-10 -bottom-14 h-36 w-36 rounded-full bg-cyan/20 blur-3xl" aria-hidden />
-              <div className="relative flex items-center gap-2 text-primary">
-                <Sparkles size={14} />
-                <p className="text-[11px] uppercase tracking-[0.24em] font-semibold">Featured Roles</p>
-              </div>
-              <p className="relative mt-1 text-xs text-muted-foreground">
-                Leadership and high-impact roles highlighted first.
-              </p>
-              <div className="relative mt-4 grid gap-3 md:grid-cols-3">
-                {featuredRoles.map(({ e, idx }) => (
-                  <a
-                    key={`${e.company}-${e.role}-featured`}
-                    href={`#${getExperienceAnchor(e.role, e.company, idx)}`}
-                    className="rounded-xl border border-primary/35 bg-background/70 p-4 shadow-[0_10px_28px_-18px_var(--glow)] transition hover:-translate-y-0.5 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-                  >
-                    <p className="text-[11px] text-primary font-semibold">{e.period}</p>
-                    <h3 className="mt-1 font-display text-lg font-bold leading-tight text-foreground">{e.role}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">{e.company}</p>
-                  </a>
-                ))}
+        <Reveal className="mb-10 flex flex-wrap justify-center gap-2">
+          {groupedExperience.map((g) => {
+            const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
+            const isActive = activeGroup === g.id;
+            return (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => setActiveGroup(g.id)}
+                className={`filter-pill inline-flex items-center gap-2 ${isActive ? "active" : ""}`}
+              >
+                <GroupIcon size={14} />
+                {g.label}
+                <span className="rounded-full bg-background/60 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums">
+                  {g.items.length}
+                </span>
+              </button>
+            );
+          })}
+        </Reveal>
+
+        <div key={activeSection.id} className="space-y-8">
+          <Reveal>
+            <div className="rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6">
+              <div className="flex items-start gap-3">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
+                  {(() => {
+                    const GroupIcon = EXPERIENCE_GROUP_ICONS[activeSection.id];
+                    return <GroupIcon size={18} />;
+                  })()}
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold md:text-xl">{activeSection.label}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{activeSection.blurb}</p>
+                </div>
               </div>
             </div>
           </Reveal>
-        )}
 
-        <Reveal className="mb-12 flex flex-wrap justify-center gap-2">
-          {groupedExperience.map((g) => (
-            <a key={g.id} href={`#experience-group-${g.id}`} className="filter-pill">
-              {g.label}
-            </a>
-          ))}
-        </Reveal>
-
-        <div className="space-y-16">
-          {groupedExperience.map((g) => {
-            const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
-            return (
-              <div key={g.id} id={`experience-group-${g.id}`} className="scroll-mt-28">
-                <Reveal className="mb-6 flex items-center gap-3">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
-                    <GroupIcon size={20} />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl md:text-2xl font-semibold">{g.label}</h3>
-                    <p className="text-sm text-muted-foreground">{g.blurb}</p>
-                  </div>
-                </Reveal>
-                <div className="grid gap-6 md:grid-cols-2">
-                  {g.items.map(({ e, idx }) => (
-                    <ExperienceCard
-                      key={`${e.company}-${idx}`}
-                      e={e}
-                      idx={idx}
-                      logoSrc={getExperienceLogo(e.company, e.role)}
-                      anchor={getExperienceAnchor(e.role, e.company, idx)}
-                    />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          <div className="relative space-y-8">
+            {activeSection.items.map(({ e, idx }, itemIdx) => (
+              <ExperienceCard
+                key={`${e.company}-${idx}`}
+                e={e}
+                idx={itemIdx}
+                logoSrc={getExperienceLogo(e.company, e.role)}
+                anchor={getExperienceAnchor(e.role, e.company, idx)}
+                isLast={itemIdx === activeSection.items.length - 1}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { _ as ArrowRight, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ChevronsRight, i as Sparkles, l as Mail, m as ExternalLink, n as Sun, o as Moon, p as FileText, r as Star, s as Menu, t as X, u as Linkedin } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-C9sNhFXI.js
+import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BfH_W3iP.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -61,6 +61,23 @@ var EDUCATION = {
 		"Engineers for Exploration (E4E)"
 	]
 };
+var EXPERIENCE_GROUPS = [
+	{
+		id: "industry",
+		label: "Industry Experience",
+		blurb: "Internships and full-time-style engineering roles."
+	},
+	{
+		id: "research",
+		label: "Research",
+		blurb: "Applied AI, ML, and computer vision research across labs and institutions."
+	},
+	{
+		id: "campus",
+		label: "Campus Leadership",
+		blurb: "Student organizations, teaching, and quant/trading clubs at UCSD."
+	}
+];
 var EXPERIENCE = [
 	{
 		role: "Chief Technology Officer & Full Stack Engineer",
@@ -68,6 +85,7 @@ var EXPERIENCE = [
 		period: "May 2026 - Present",
 		location: "San Diego, CA",
 		featured: true,
+		group: "industry",
 		description: "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
 		tags: [
 			"React",
@@ -77,10 +95,30 @@ var EXPERIENCE = [
 		]
 	},
 	{
+		role: "Technology Consultant Intern, AI Engineering",
+		company: "PwC India",
+		period: "Jun 2025 - Sep 2025",
+		location: "Gurugram, India",
+		featured: true,
+		group: "industry",
+		description: "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
+		tags: [
+			"LangGraph",
+			"Gemini 2.5 Pro",
+			"Agentic AI",
+			"Generative AI",
+			"AWS",
+			"Azure",
+			"GCP",
+			"Tableau"
+		]
+	},
+	{
 		role: "Applied AI Research Assistant",
-		company: "UCSD CSE",
+		company: "UCSD CSE (STSLab)",
 		period: "Nov 2025 - Present",
 		location: "San Diego, CA",
+		group: "research",
 		description: "Research with Prof. Deepak Kumar (UCSD) and Prof. Jeremy D. Foote (Purdue) on chatbot-driven interventions and Reddit user behavior. Co-authoring a paper on whether AI-mediated conversations can reduce toxic discourse at scale. Built data pipelines and evaluation workflows for generative AI and agentic AI research, including MCP-based tooling and model analysis.",
 		tags: [
 			"LLMs",
@@ -95,6 +133,7 @@ var EXPERIENCE = [
 		company: "Engineers for Exploration (E4E)",
 		period: "Oct 2025 - Apr 2026",
 		location: "San Diego, CA",
+		group: "research",
 		description: "Lead an interdisciplinary team building an AI system that predicts mangrove presence by fusing drone imagery and Sentinel-2 satellite data for Scripps Institution of Oceanography. Oversee data pipelines, feature fusion, and model integration with Python, TensorFlow, NumPy, and Google Earth Engine.",
 		tags: [
 			"TensorFlow",
@@ -103,21 +142,17 @@ var EXPERIENCE = [
 		]
 	},
 	{
-		role: "Technology Consultant Intern, AI Engineering",
-		company: "PwC India",
-		period: "Jun 2025 - Sep 2025",
-		location: "Gurugram, India",
-		featured: true,
-		description: "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
+		role: "ML Research Intern",
+		company: "IIT Guwahati",
+		period: "Jun 2024 - Sep 2024",
+		location: "Assam, India",
+		group: "research",
+		description: "Developed a ResNet50 CNN for SAR image classification achieving 80% accuracy across land cover types. Applied Lee and Gamma MAP speckle filters. Evaluated with precision, recall, F1-scores, and confusion matrices.",
 		tags: [
-			"LangGraph",
-			"Gemini 2.5 Pro",
-			"Agentic AI",
-			"Generative AI",
-			"AWS",
-			"Azure",
-			"GCP",
-			"Tableau"
+			"PyTorch",
+			"SAR",
+			"CNN",
+			"ResNet50"
 		]
 	},
 	{
@@ -125,6 +160,7 @@ var EXPERIENCE = [
 		company: "DS3, Data Science Student Society",
 		period: "Jul 2025 - Present",
 		location: "San Diego, CA",
+		group: "campus",
 		description: "Lead ideation and selection of 10-12+ quarterly data science projects. Mentor teams through full data pipelines, including preprocessing, feature engineering, model selection, and deployment. Coordinate timelines and evaluation metrics with senior leadership for end-of-quarter showcases.",
 		tags: ["Leadership", "Data Science"]
 	},
@@ -133,6 +169,7 @@ var EXPERIENCE = [
 		company: "Halicioglu Data Science Institute, UCSD",
 		period: "Mar 2025 - Jun 2025",
 		location: "San Diego, CA",
+		group: "campus",
 		description: "Conducted weekly discussion sections and office hours for DSC 40A covering empirical risk minimization, optimization, regression, classification, and discrete probability. Evaluated assignments and exams with structured feedback.",
 		tags: ["Machine Learning", "Teaching"]
 	},
@@ -142,6 +179,7 @@ var EXPERIENCE = [
 		period: "Jun 2026 - Present",
 		location: "San Diego, CA",
 		featured: true,
+		group: "campus",
 		description: "Lead CSES Open Source strategy, org-wide engineering initiatives, and cross-team execution while continuing to drive TritonSpend product direction and delivery.",
 		tags: [
 			"Leadership",
@@ -170,25 +208,13 @@ var EXPERIENCE = [
 		company: "Triton Quantitative Trading (TQT)",
 		period: "Oct 2024 - Jan 2025",
 		location: "San Diego, CA",
+		group: "campus",
 		description: "Built a hybrid LSTM/GRU forecasting model with Monte Carlo simulations (Geometric Brownian Motion). Integrated technical indicators, VADER sentiment analysis, and Sharpe Ratio risk metrics. Deployed as a modular Streamlit app with yFinance and REST API support.",
 		tags: [
 			"LSTM",
 			"GRU",
 			"Streamlit",
 			"Monte Carlo"
-		]
-	},
-	{
-		role: "ML Research Intern",
-		company: "IIT Guwahati",
-		period: "Jun 2024 - Sep 2024",
-		location: "Assam, India",
-		description: "Developed a ResNet50 CNN for SAR image classification achieving 80% accuracy across land cover types. Applied Lee and Gamma MAP speckle filters. Evaluated with precision, recall, F1-scores, and confusion matrices.",
-		tags: [
-			"PyTorch",
-			"SAR",
-			"CNN",
-			"ResNet50"
 		]
 	}
 ];
@@ -289,6 +315,7 @@ var PROJECTS = [...[
 			"Open-Meteo",
 			"GBIF"
 		],
+		github: "https://github.com/VedVar43789/InvasiveSpeciesTracker",
 		demo: "https://invasive-watch.vercel.app",
 		tags: [
 			"ml",
@@ -308,6 +335,7 @@ var PROJECTS = [...[
 			"ResNet18",
 			"Computer Vision"
 		],
+		github: "https://github.com/VedVar43789/SoCal-Guessr",
 		tags: ["ml", "cv"],
 		sortKey: 202602
 	},
@@ -356,6 +384,7 @@ var PROJECTS = [...[
 			"OpenCV",
 			"Streamlit"
 		],
+		github: "https://github.com/VedVar43789/PantryPal",
 		demo: "https://pantrypalucsd.streamlit.app/",
 		tags: [
 			"ml",
@@ -377,6 +406,7 @@ var PROJECTS = [...[
 			"Streamlit",
 			"lifelines"
 		],
+		github: "https://github.com/VedVar43789/TubeScope",
 		demo: "https://tubescopeds3.streamlit.app/",
 		tags: [
 			"ml",
@@ -396,6 +426,7 @@ var PROJECTS = [...[
 			"D3.js",
 			"TopoJSON"
 		],
+		github: "https://github.com/VedVar43789/earthquakes",
 		demo: "https://vedvar43789.github.io/earthquakes/",
 		tags: ["dataviz"],
 		sortKey: 202506
@@ -410,6 +441,8 @@ var PROJECTS = [...[
 			"Random Forest",
 			"GridSearchCV"
 		],
+		github: "https://github.com/VedVar43789/watts-the-problem",
+		demo: "https://vedvar43789.github.io/watts-the-problem/",
 		tags: ["ml"],
 		sortKey: 202503
 	},
@@ -440,6 +473,8 @@ var PROJECTS = [...[
 			"Node.js",
 			"PostgreSQL"
 		],
+		github: "https://github.com/CSES-Open-Source/TritonSpend",
+		demo: "https://tritonspend.netlify.app",
 		tags: ["backend", "api"],
 		sortKey: 202411
 	},
@@ -1051,7 +1086,7 @@ var PROJECT_IMAGE_OVERRIDES = {
 };
 var EXPERIENCE_LOGO_OVERRIDES = {
 	UniCircle: "unicircle",
-	"UCSD CSE": "cse",
+	"UCSD CSE (STSLab)": "cse",
 	"Engineers for Exploration (E4E)": "e4e",
 	"PwC India": "pwc",
 	"DS3, Data Science Student Society": "ds3",
@@ -1059,6 +1094,11 @@ var EXPERIENCE_LOGO_OVERRIDES = {
 	"CSES Open Source, TritonSpend": "cses",
 	"Triton Quantitative Trading (TQT)": "tqt",
 	"IIT Guwahati": "iitg_logo"
+};
+var EXPERIENCE_GROUP_ICONS = {
+	industry: Briefcase,
+	research: FlaskConical,
+	campus: Users
 };
 function SectionHeader({ eyebrow, title, subtitle }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
@@ -1175,7 +1215,119 @@ function Education() {
 		})
 	});
 }
+function ExperienceCard({ e, idx, logoSrc, anchor, isLast }) {
+	const isFeatured = Boolean(e.featured);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+		delay: idx * 50,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+			id: anchor,
+			className: "relative scroll-mt-28 pl-8 md:pl-10",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: `absolute left-0 top-6 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-background ${isFeatured ? "bg-amber-300 shadow-[0_0_0_4px_rgba(251,191,36,0.25)]" : "bg-primary shadow-[0_0_0_4px_var(--background)]"}`,
+					"aria-hidden": true
+				}),
+				!isLast && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "absolute left-0 top-9 bottom-0 w-px -translate-x-1/2 bg-border",
+					"aria-hidden": true
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: `card-hover rounded-2xl p-5 md:p-6 ${isFeatured ? "border border-amber-300/45 bg-gradient-to-br from-amber-200/10 via-card/85 to-primary/10" : "glass"}`,
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex min-w-0 items-start gap-3.5",
+								children: [logoSrc ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: logoSrc,
+									alt: `${e.company} logo`,
+									className: "h-11 w-11 shrink-0 rounded-xl border border-border/70 bg-background/70 object-contain p-1.5",
+									loading: "lazy"
+								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Briefcase, { size: 18 })
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "min-w-0",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex flex-wrap items-center gap-2",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+												className: "font-display text-lg font-semibold leading-snug text-foreground",
+												children: e.role
+											}), isFeatured && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "inline-flex items-center gap-1 rounded-full border border-amber-300/50 bg-amber-200/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-200",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Star, {
+													size: 10,
+													className: "fill-amber-200 text-amber-200",
+													"aria-hidden": true
+												}), "Featured"]
+											})]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "mt-0.5 text-sm font-medium text-primary",
+											children: e.company
+										}),
+										(e.location || e.meta) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground",
+											children: [e.location && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "inline-flex items-center gap-1",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapPin, {
+													size: 12,
+													className: "shrink-0"
+												}), e.location]
+											}), e.meta && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: e.meta })]
+										})
+									]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: `shrink-0 text-xs font-semibold sm:text-right ${isFeatured ? "text-amber-200" : "text-primary"}`,
+								children: e.period
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-4 text-sm leading-relaxed text-muted-foreground",
+							children: e.description
+						}),
+						e.progression && e.progression.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "mt-5 rounded-xl border border-border/70 bg-background/35 p-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[11px] font-semibold uppercase tracking-[0.18em] text-primary",
+								children: "Career progression"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
+								className: "mt-3 space-y-3",
+								children: e.progression.map((step) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+									className: "flex gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: `mt-1.5 h-2 w-2 shrink-0 rounded-full ${step.current ? "bg-primary ring-2 ring-primary/30" : "bg-muted-foreground/40"}`,
+										"aria-hidden": true
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "min-w-0",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: `text-sm font-medium ${step.current ? "text-foreground" : "text-muted-foreground"}`,
+											children: step.role
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-xs text-muted-foreground",
+											children: step.period
+										})]
+									})]
+								}, `${step.role}-${step.period}`))
+							})]
+						}),
+						e.tags && e.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "mt-5 flex flex-wrap gap-2 border-t border-border/60 pt-4",
+							children: e.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "skill-pill",
+								children: t
+							}, t))
+						})
+					]
+				})
+			]
+		})
+	});
+}
 function Experience() {
+	const [activeGroup, setActiveGroup] = (0, import_react.useState)("industry");
 	const getExperienceLogo = (company, role) => {
 		const overrideName = EXPERIENCE_LOGO_OVERRIDES[company];
 		if (overrideName) {
@@ -1189,171 +1341,75 @@ function Experience() {
 		]);
 	};
 	const getExperienceAnchor = (role, company, idx) => `experience-${idx}-${normalizeAssetKey(`${role}-${company}`).replace(/\s+/g, "-")}`;
-	const featuredRoles = EXPERIENCE.map((e, idx) => ({
-		e,
-		idx
-	})).filter((row) => row.e.featured);
+	const groupedExperience = EXPERIENCE_GROUPS.map((g) => ({
+		...g,
+		items: EXPERIENCE.map((e, idx) => ({
+			e,
+			idx
+		})).filter((row) => row.e.group === g.id)
+	}));
+	const activeSection = groupedExperience.find((g) => g.id === activeGroup) ?? groupedExperience[0];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		id: "experience",
 		className: "relative py-24 md:py-32",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "mx-auto max-w-5xl px-6",
+			className: "mx-auto max-w-4xl px-6",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
 					eyebrow: "Experience",
 					title: "Work & Research",
-					subtitle: "Most recent first."
+					subtitle: "Industry, research, and campus leadership — grouped for quick scanning."
 				}),
-				featuredRoles.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-					className: "mb-10",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative overflow-hidden rounded-2xl border border-primary/45 bg-gradient-to-br from-primary/12 via-card/70 to-cyan/10 p-5 shadow-[0_18px_45px_-24px_var(--glow)] md:p-6",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full bg-primary/20 blur-3xl",
-								"aria-hidden": true
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "pointer-events-none absolute -left-10 -bottom-14 h-36 w-36 rounded-full bg-cyan/20 blur-3xl",
-								"aria-hidden": true
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "relative flex items-center gap-2 text-primary",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { size: 14 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-[11px] uppercase tracking-[0.24em] font-semibold",
-									children: "Featured Roles"
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "relative mt-1 text-xs text-muted-foreground",
-								children: "Leadership and high-impact roles highlighted first."
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "relative mt-4 grid gap-3 md:grid-cols-3",
-								children: featuredRoles.map(({ e, idx }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-									href: `#${getExperienceAnchor(e.role, e.company, idx)}`,
-									className: "rounded-xl border border-primary/35 bg-background/70 p-4 shadow-[0_10px_28px_-18px_var(--glow)] transition hover:-translate-y-0.5 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
-									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-[11px] text-primary font-semibold",
-											children: e.period
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-											className: "mt-1 font-display text-lg font-bold leading-tight text-foreground",
-											children: e.role
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "mt-1 text-xs text-muted-foreground",
-											children: e.company
-										})
-									]
-								}, `${e.company}-${e.role}-featured`))
-							})
-						]
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+					className: "mb-10 flex flex-wrap justify-center gap-2",
+					children: groupedExperience.map((g) => {
+						const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							type: "button",
+							onClick: () => setActiveGroup(g.id),
+							className: `filter-pill inline-flex items-center gap-2 ${activeGroup === g.id ? "active" : ""}`,
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 14 }),
+								g.label,
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "rounded-full bg-background/60 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums",
+									children: g.items.length
+								})
+							]
+						}, g.id);
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "relative",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-border to-transparent md:-translate-x-1/2",
-						"aria-hidden": true
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-						className: "space-y-10",
-						children: EXPERIENCE.map((e, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-							className: "relative",
-							children: (() => {
-								const logoSrc = getExperienceLogo(e.company, e.role);
-								const isFeatured = Boolean(e.featured);
-								return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-									delay: i * 60,
-									className: `md:grid md:grid-cols-2 md:gap-10 ${i % 2 === 1 ? "md:[&>div]:col-start-2" : ""}`,
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "relative pl-12 md:pl-0 md:pr-10 md:text-right",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute left-2 md:left-auto md:right-[-9px] top-3 h-3 w-3 rounded-full bg-primary shadow-[0_0_0_4px_var(--background)]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											id: getExperienceAnchor(e.role, e.company, i),
-											className: `card-hover rounded-xl p-6 md:inline-block md:text-left md:max-w-md ${isFeatured ? "border border-amber-300/50 bg-gradient-to-br from-amber-200/10 via-card/85 to-primary/10 shadow-[0_12px_35px_-20px_rgba(251,191,36,0.65)]" : "glass"} scroll-mt-28`,
-											children: [
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-													className: `text-xs font-medium ${isFeatured ? "text-amber-300" : "text-primary"}`,
-													children: e.period
-												}),
-												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-													className: "mt-1 flex items-start gap-3",
-													children: [logoSrc && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-														src: logoSrc,
-														alt: `${e.company} logo`,
-														className: "h-9 w-9 rounded-md border border-border/70 object-contain bg-background/70 p-1",
-														loading: "lazy"
-													}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-														className: "min-w-0",
-														children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-															className: "flex items-center gap-2",
-															children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-																className: "font-display text-lg font-semibold",
-																children: e.role
-															}), isFeatured && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Star, {
-																size: 14,
-																className: "fill-amber-300 text-amber-300",
-																"aria-label": "Featured role"
-															})]
-														}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-															className: "text-primary text-sm font-medium mt-0.5",
-															children: e.company
-														})]
-													})]
-												}),
-												e.meta && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-													className: "text-xs text-muted-foreground mt-1",
-													children: e.meta
-												}),
-												e.location && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-													className: "text-xs text-muted-foreground mt-0.5",
-													children: e.location
-												}),
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-													className: "mt-3 text-sm text-muted-foreground",
-													children: e.description
-												}),
-												e.progression && e.progression.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-													className: "mt-4 rounded-lg border border-border/70 bg-background/30 p-3",
-													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-														className: "text-[11px] uppercase tracking-[0.18em] text-primary font-semibold",
-														children: "Career Progression"
-													}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-														className: "mt-2 flex flex-wrap items-center gap-2",
-														children: e.progression.map((step, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-															className: "contents",
-															children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-																className: `rounded-md border px-2.5 py-1.5 text-xs ${step.current ? "border-primary/70 bg-primary/15 text-foreground" : "border-border/70 bg-background/55 text-muted-foreground"}`,
-																children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-																	className: "font-medium",
-																	children: step.role
-																}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-																	className: "text-[11px] opacity-80",
-																	children: step.period
-																})]
-															}), idx < e.progression.length - 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronsRight, {
-																size: 14,
-																className: "text-primary/60"
-															})]
-														}, `${step.role}-${step.period}`))
-													})]
-												}),
-												e.tags && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-													className: "mt-4 flex flex-wrap gap-2",
-													children: e.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-														className: "skill-pill",
-														children: t
-													}, t))
-												})
-											]
-										})]
-									})
-								});
-							})()
-						}, `${e.company}-${i}`))
+					className: "space-y-8",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-start gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary",
+								children: (() => {
+									const GroupIcon = EXPERIENCE_GROUP_ICONS[activeSection.id];
+									return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 18 });
+								})()
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "font-display text-lg font-semibold md:text-xl",
+								children: activeSection.label
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-1 text-sm text-muted-foreground",
+								children: activeSection.blurb
+							})] })]
+						})
+					}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "relative space-y-8",
+						children: activeSection.items.map(({ e, idx }, itemIdx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExperienceCard, {
+							e,
+							idx: itemIdx,
+							logoSrc: getExperienceLogo(e.company, e.role),
+							anchor: getExperienceAnchor(e.role, e.company, idx),
+							isLast: itemIdx === activeSection.items.length - 1
+						}, `${e.company}-${idx}`))
 					})]
-				})
+				}, activeSection.id)
 			]
 		})
 	});
