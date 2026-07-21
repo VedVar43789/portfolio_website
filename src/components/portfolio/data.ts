@@ -36,6 +36,26 @@ export const EDUCATION = {
   clubs: ["DS3", "CSES", "Engineers for Exploration (E4E)"],
 };
 
+export type ExperienceGroupId = "industry" | "research" | "campus";
+
+export const EXPERIENCE_GROUPS: { id: ExperienceGroupId; label: string; blurb: string }[] = [
+  {
+    id: "industry",
+    label: "Industry Experience",
+    blurb: "Internships and full-time-style engineering roles.",
+  },
+  {
+    id: "research",
+    label: "Research",
+    blurb: "Applied AI, ML, and computer vision research across labs and institutions.",
+  },
+  {
+    id: "campus",
+    label: "Campus Leadership",
+    blurb: "Student organizations, teaching, and quant/trading clubs at UCSD.",
+  },
+];
+
 export type Experience = {
   role: string;
   company: string;
@@ -45,6 +65,7 @@ export type Experience = {
   description: string;
   tags?: string[];
   featured?: boolean;
+  group: ExperienceGroupId;
   progression?: {
     role: string;
     period: string;
@@ -59,15 +80,28 @@ export const EXPERIENCE: Experience[] = [
     period: "May 2026 - Present",
     location: "San Diego, CA",
     featured: true,
+    group: "industry",
     description:
       "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
     tags: ["React", "TypeScript", "Supabase", "Vercel"],
   },
   {
+    role: "Technology Consultant Intern, AI Engineering",
+    company: "PwC India",
+    period: "Jun 2025 - Sep 2025",
+    location: "Gurugram, India",
+    featured: true,
+    group: "industry",
+    description:
+      "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
+    tags: ["LangGraph", "Gemini 2.5 Pro", "Agentic AI", "Generative AI", "AWS", "Azure", "GCP", "Tableau"],
+  },
+  {
     role: "Applied AI Research Assistant",
-    company: "UCSD CSE",
+    company: "UCSD CSE (STSLab)",
     period: "Nov 2025 - Present",
     location: "San Diego, CA",
+    group: "research",
     description:
       "Research with Prof. Deepak Kumar (UCSD) and Prof. Jeremy D. Foote (Purdue) on chatbot-driven interventions and Reddit user behavior. Co-authoring a paper on whether AI-mediated conversations can reduce toxic discourse at scale. Built data pipelines and evaluation workflows for generative AI and agentic AI research, including MCP-based tooling and model analysis.",
     tags: ["LLMs", "Applied ML", "Generative AI", "Agentic AI", "MCP"],
@@ -77,25 +111,27 @@ export const EXPERIENCE: Experience[] = [
     company: "Engineers for Exploration (E4E)",
     period: "Oct 2025 - Apr 2026",
     location: "San Diego, CA",
+    group: "research",
     description:
       "Lead an interdisciplinary team building an AI system that predicts mangrove presence by fusing drone imagery and Sentinel-2 satellite data for Scripps Institution of Oceanography. Oversee data pipelines, feature fusion, and model integration with Python, TensorFlow, NumPy, and Google Earth Engine.",
     tags: ["TensorFlow", "Google Earth Engine", "Sentinel-2"],
   },
   {
-    role: "Technology Consultant Intern, AI Engineering",
-    company: "PwC India",
-    period: "Jun 2025 - Sep 2025",
-    location: "Gurugram, India",
-    featured: true,
+    role: "ML Research Intern",
+    company: "IIT Guwahati",
+    period: "Jun 2024 - Sep 2024",
+    location: "Assam, India",
+    group: "research",
     description:
-      "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
-    tags: ["LangGraph", "Gemini 2.5 Pro", "Agentic AI", "Generative AI", "AWS", "Azure", "GCP", "Tableau"],
+      "Developed a ResNet50 CNN for SAR image classification achieving 80% accuracy across land cover types. Applied Lee and Gamma MAP speckle filters. Evaluated with precision, recall, F1-scores, and confusion matrices.",
+    tags: ["PyTorch", "SAR", "CNN", "ResNet50"],
   },
   {
     role: "Assistant Projects Director (Projects Mentor)",
     company: "DS3, Data Science Student Society",
     period: "Jul 2025 - Present",
     location: "San Diego, CA",
+    group: "campus",
     description:
       "Lead ideation and selection of 10-12+ quarterly data science projects. Mentor teams through full data pipelines, including preprocessing, feature engineering, model selection, and deployment. Coordinate timelines and evaluation metrics with senior leadership for end-of-quarter showcases.",
     tags: ["Leadership", "Data Science"],
@@ -105,6 +141,7 @@ export const EXPERIENCE: Experience[] = [
     company: "Halicioglu Data Science Institute, UCSD",
     period: "Mar 2025 - Jun 2025",
     location: "San Diego, CA",
+    group: "campus",
     description:
       "Conducted weekly discussion sections and office hours for DSC 40A covering empirical risk minimization, optimization, regression, classification, and discrete probability. Evaluated assignments and exams with structured feedback.",
     tags: ["Machine Learning", "Teaching"],
@@ -115,6 +152,7 @@ export const EXPERIENCE: Experience[] = [
     period: "Jun 2026 - Present",
     location: "San Diego, CA",
     featured: true,
+    group: "campus",
     description:
       "Lead CSES Open Source strategy, org-wide engineering initiatives, and cross-team execution while continuing to drive TritonSpend product direction and delivery.",
     tags: ["Leadership", "React Native", "Node.js", "PostgreSQL"],
@@ -129,18 +167,10 @@ export const EXPERIENCE: Experience[] = [
     company: "Triton Quantitative Trading (TQT)",
     period: "Oct 2024 - Jan 2025",
     location: "San Diego, CA",
+    group: "campus",
     description:
       "Built a hybrid LSTM/GRU forecasting model with Monte Carlo simulations (Geometric Brownian Motion). Integrated technical indicators, VADER sentiment analysis, and Sharpe Ratio risk metrics. Deployed as a modular Streamlit app with yFinance and REST API support.",
     tags: ["LSTM", "GRU", "Streamlit", "Monte Carlo"],
-  },
-  {
-    role: "ML Research Intern",
-    company: "IIT Guwahati",
-    period: "Jun 2024 - Sep 2024",
-    location: "Assam, India",
-    description:
-      "Developed a ResNet50 CNN for SAR image classification achieving 80% accuracy across land cover types. Applied Lee and Gamma MAP speckle filters. Evaluated with precision, recall, F1-scores, and confusion matrices.",
-    tags: ["PyTorch", "SAR", "CNN", "ResNet50"],
   },
 ];
 
