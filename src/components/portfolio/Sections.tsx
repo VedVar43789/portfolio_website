@@ -297,7 +297,7 @@ export function Experience() {
     ...g,
     items: EXPERIENCE.map((e, idx) => ({ e, idx }))
       .filter((row) => row.e.group === g.id)
-      .sort((a, b) => b.e.sortKey - a.e.sortKey),
+      .sort((a, b) => (b.e.sortKey ?? 0) - (a.e.sortKey ?? 0)),
   }));
 
   return (

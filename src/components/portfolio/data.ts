@@ -76,18 +76,6 @@ export type Experience = {
 
 export const EXPERIENCE: Experience[] = [
   {
-    role: "Chief Technology Officer & Full Stack Engineer",
-    company: "UniCircle",
-    period: "May 2026 - Present",
-    location: "San Diego, CA",
-    featured: true,
-    group: "industry",
-    sortKey: 90,
-    description:
-      "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
-    tags: ["React", "TypeScript", "Supabase", "Vercel"],
-  },
-  {
     role: "Technology Consultant Intern, AI Engineering",
     company: "PricewaterhouseCoopers LLP (PwC)",
     period: "Jun 2025 - Sep 2025",
@@ -98,6 +86,18 @@ export const EXPERIENCE: Experience[] = [
     description:
       "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
     tags: ["LangGraph", "Gemini 2.5 Pro", "Agentic AI", "Generative AI", "AWS", "Azure", "GCP", "Tableau"],
+  },
+  {
+    role: "Chief Technology Officer & Full Stack Engineer",
+    company: "UniCircle",
+    period: "May 2026 - Present",
+    location: "San Diego, CA",
+    featured: true,
+    group: "industry",
+    sortKey: 90,
+    description:
+      "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
+    tags: ["React", "TypeScript", "Supabase", "Vercel"],
   },
   {
     role: "Applied AI Research Assistant",
@@ -133,6 +133,23 @@ export const EXPERIENCE: Experience[] = [
     tags: ["PyTorch", "SAR", "CNN", "ResNet50"],
   },
   {
+    role: "President",
+    company: "CSES Open Source, TritonSpend",
+    period: "Jun 2026 - Present",
+    location: "San Diego, CA",
+    featured: true,
+    group: "campus",
+    sortKey: 100,
+    description:
+      "Lead CSES Open Source strategy, org-wide engineering initiatives, and cross-team execution while continuing to drive TritonSpend product direction and delivery.",
+    tags: ["Leadership", "React Native", "Node.js", "PostgreSQL"],
+    progression: [
+      { role: "Software Developer", period: "Nov 2024 - Jul 2025" },
+      { role: "Engineering Manager", period: "Jul 2025 - Jun 2026" },
+      { role: "President", period: "Jun 2026 - Present", current: true },
+    ],
+  },
+  {
     role: "Assistant Projects Director (Projects Mentor)",
     company: "DS3, Data Science Student Society",
     period: "Jul 2025 - Present",
@@ -153,23 +170,6 @@ export const EXPERIENCE: Experience[] = [
     description:
       "Conducted weekly discussion sections and office hours for DSC 40A covering empirical risk minimization, optimization, regression, classification, and discrete probability. Evaluated assignments and exams with structured feedback.",
     tags: ["Machine Learning", "Teaching"],
-  },
-  {
-    role: "President",
-    company: "CSES Open Source, TritonSpend",
-    period: "Jun 2026 - Present",
-    location: "San Diego, CA",
-    featured: true,
-    group: "campus",
-    sortKey: 100,
-    description:
-      "Lead CSES Open Source strategy, org-wide engineering initiatives, and cross-team execution while continuing to drive TritonSpend product direction and delivery.",
-    tags: ["Leadership", "React Native", "Node.js", "PostgreSQL"],
-    progression: [
-      { role: "Software Developer", period: "Nov 2024 - Jul 2025" },
-      { role: "Engineering Manager", period: "Jul 2025 - Jun 2026" },
-      { role: "President", period: "Jun 2026 - Present", current: true },
-    ],
   },
   {
     role: "Quantitative Analyst",
