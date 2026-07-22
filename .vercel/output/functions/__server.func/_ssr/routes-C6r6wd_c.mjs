@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CLg5aJ8-.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-C6r6wd_c.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -1342,6 +1342,7 @@ function ExperienceCard({ e, idx, logoSrc, anchor, isLast }) {
 	});
 }
 function Experience() {
+	const [activeGroup, setActiveGroup] = (0, import_react.useState)("industry");
 	const getExperienceLogo = (company, role) => {
 		const overrideName = EXPERIENCE_LOGO_OVERRIDES[company];
 		if (overrideName) {
@@ -1358,53 +1359,69 @@ function Experience() {
 			idx
 		})).filter((row) => row.e.group === g.id).sort((a, b) => (b.e.sortKey ?? 0) - (a.e.sortKey ?? 0))
 	}));
+	const activeSection = groupedExperience.find((g) => g.id === activeGroup) ?? groupedExperience[0];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		id: "experience",
 		className: "relative py-24 md:py-32",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "mx-auto max-w-4xl px-6",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
-				eyebrow: "Experience",
-				title: "Work & Research",
-				subtitle: "Industry, research, and campus leadership — most significant roles first in each group."
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "space-y-16",
-				children: groupedExperience.map((g) => {
-					const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
-					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						id: `experience-group-${g.id}`,
-						className: "scroll-mt-28",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							className: "mb-8",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-start gap-3",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 18 })
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-										className: "font-display text-lg font-semibold md:text-xl",
-										children: g.label
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "mt-1 text-sm text-muted-foreground",
-										children: g.blurb
-									})] })]
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
+					eyebrow: "Experience",
+					title: "Work & Research",
+					subtitle: "Industry, research, and campus leadership — grouped for quick scanning."
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+					className: "mb-10 flex flex-wrap justify-center gap-2",
+					children: groupedExperience.map((g) => {
+						const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							type: "button",
+							onClick: () => setActiveGroup(g.id),
+							className: `filter-pill inline-flex items-center gap-2 ${activeGroup === g.id ? "active" : ""}`,
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 14 }),
+								g.label,
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "rounded-full bg-background/60 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums",
+									children: g.items.length
 								})
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "relative space-y-8",
-							children: g.items.map(({ e, idx }, itemIdx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExperienceCard, {
-								e,
-								idx: itemIdx,
-								logoSrc: getExperienceLogo(e.company, e.role),
-								anchor: getExperienceAnchor(e.role, e.company, idx),
-								isLast: itemIdx === g.items.length - 1
-							}, `${e.company}-${idx}`))
-						})]
-					}, g.id);
-				})
-			})]
+							]
+						}, g.id);
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "space-y-8",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-start gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary",
+								children: (() => {
+									const GroupIcon = EXPERIENCE_GROUP_ICONS[activeSection.id];
+									return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 18 });
+								})()
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "font-display text-lg font-semibold md:text-xl",
+								children: activeSection.label
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-1 text-sm text-muted-foreground",
+								children: activeSection.blurb
+							})] })]
+						})
+					}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "relative space-y-8",
+						children: activeSection.items.map(({ e, idx }, itemIdx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExperienceCard, {
+							e,
+							idx: itemIdx,
+							logoSrc: getExperienceLogo(e.company, e.role),
+							anchor: getExperienceAnchor(e.role, e.company, idx),
+							isLast: itemIdx === activeSection.items.length - 1
+						}, `${e.company}-${idx}`))
+					})]
+				}, activeSection.id)
+			]
 		})
 	});
 }

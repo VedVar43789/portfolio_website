@@ -282,6 +282,8 @@ function ExperienceCard({
 }
 
 export function Experience() {
+  const [activeGroup, setActiveGroup] = useState<ExperienceGroupId>("industry");
+
   const getExperienceLogo = (company: string, role: string) => {
     const overrideName = EXPERIENCE_LOGO_OVERRIDES[company];
     if (overrideName) {
@@ -299,6 +301,7 @@ export function Experience() {
       .filter((row) => row.e.group === g.id)
       .sort((a, b) => (b.e.sortKey ?? 0) - (a.e.sortKey ?? 0)),
   }));
+  const activeSection = groupedExperience.find((g) => g.id === activeGroup) ?? groupedExperience[0];
 
   return (
     <section id="experience" className="relative py-24 md:py-32">
@@ -306,43 +309,60 @@ export function Experience() {
         <SectionHeader
           eyebrow="Experience"
           title="Work & Research"
-          subtitle="Industry, research, and campus leadership — most significant roles first in each group."
+          subtitle="Industry, research, and campus leadership — grouped for quick scanning."
         />
 
-        <div className="space-y-16">
+        <Reveal className="mb-10 flex flex-wrap justify-center gap-2">
           {groupedExperience.map((g) => {
             const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
+            const isActive = activeGroup === g.id;
             return (
-              <div key={g.id} id={`experience-group-${g.id}`} className="scroll-mt-28">
-                <Reveal className="mb-8">
-                  <div className="rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6">
-                    <div className="flex items-start gap-3">
-                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
-                        <GroupIcon size={18} />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-lg font-semibold md:text-xl">{g.label}</h3>
-                        <p className="mt-1 text-sm text-muted-foreground">{g.blurb}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-
-                <div className="relative space-y-8">
-                  {g.items.map(({ e, idx }, itemIdx) => (
-                    <ExperienceCard
-                      key={`${e.company}-${idx}`}
-                      e={e}
-                      idx={itemIdx}
-                      logoSrc={getExperienceLogo(e.company, e.role)}
-                      anchor={getExperienceAnchor(e.role, e.company, idx)}
-                      isLast={itemIdx === g.items.length - 1}
-                    />
-                  ))}
-                </div>
-              </div>
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => setActiveGroup(g.id)}
+                className={`filter-pill inline-flex items-center gap-2 ${isActive ? "active" : ""}`}
+              >
+                <GroupIcon size={14} />
+                {g.label}
+                <span className="rounded-full bg-background/60 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums">
+                  {g.items.length}
+                </span>
+              </button>
             );
           })}
+        </Reveal>
+
+        <div key={activeSection.id} className="space-y-8">
+          <Reveal>
+            <div className="rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6">
+              <div className="flex items-start gap-3">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
+                  {(() => {
+                    const GroupIcon = EXPERIENCE_GROUP_ICONS[activeSection.id];
+                    return <GroupIcon size={18} />;
+                  })()}
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold md:text-xl">{activeSection.label}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{activeSection.blurb}</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="relative space-y-8">
+            {activeSection.items.map(({ e, idx }, itemIdx) => (
+              <ExperienceCard
+                key={`${e.company}-${idx}`}
+                e={e}
+                idx={itemIdx}
+                logoSrc={getExperienceLogo(e.company, e.role)}
+                anchor={getExperienceAnchor(e.role, e.company, idx)}
+                isLast={itemIdx === activeSection.items.length - 1}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
