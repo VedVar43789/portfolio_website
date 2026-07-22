@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-BfH_W3iP.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CLg5aJ8-.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -80,27 +80,13 @@ var EXPERIENCE_GROUPS = [
 ];
 var EXPERIENCE = [
 	{
-		role: "Chief Technology Officer & Full Stack Engineer",
-		company: "UniCircle",
-		period: "May 2026 - Present",
-		location: "San Diego, CA",
-		featured: true,
-		group: "industry",
-		description: "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
-		tags: [
-			"React",
-			"TypeScript",
-			"Supabase",
-			"Vercel"
-		]
-	},
-	{
 		role: "Technology Consultant Intern, AI Engineering",
-		company: "PwC India",
+		company: "PricewaterhouseCoopers LLP (PwC)",
 		period: "Jun 2025 - Sep 2025",
 		location: "Gurugram, India",
 		featured: true,
 		group: "industry",
+		sortKey: 100,
 		description: "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
 		tags: [
 			"LangGraph",
@@ -114,11 +100,28 @@ var EXPERIENCE = [
 		]
 	},
 	{
+		role: "Chief Technology Officer & Full Stack Engineer",
+		company: "UniCircle",
+		period: "May 2026 - Present",
+		location: "San Diego, CA",
+		featured: true,
+		group: "industry",
+		sortKey: 90,
+		description: "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
+		tags: [
+			"React",
+			"TypeScript",
+			"Supabase",
+			"Vercel"
+		]
+	},
+	{
 		role: "Applied AI Research Assistant",
 		company: "UCSD CSE (STSLab)",
 		period: "Nov 2025 - Present",
 		location: "San Diego, CA",
 		group: "research",
+		sortKey: 100,
 		description: "Research with Prof. Deepak Kumar (UCSD) and Prof. Jeremy D. Foote (Purdue) on chatbot-driven interventions and Reddit user behavior. Co-authoring a paper on whether AI-mediated conversations can reduce toxic discourse at scale. Built data pipelines and evaluation workflows for generative AI and agentic AI research, including MCP-based tooling and model analysis.",
 		tags: [
 			"LLMs",
@@ -134,6 +137,7 @@ var EXPERIENCE = [
 		period: "Oct 2025 - Apr 2026",
 		location: "San Diego, CA",
 		group: "research",
+		sortKey: 90,
 		description: "Lead an interdisciplinary team building an AI system that predicts mangrove presence by fusing drone imagery and Sentinel-2 satellite data for Scripps Institution of Oceanography. Oversee data pipelines, feature fusion, and model integration with Python, TensorFlow, NumPy, and Google Earth Engine.",
 		tags: [
 			"TensorFlow",
@@ -147,6 +151,7 @@ var EXPERIENCE = [
 		period: "Jun 2024 - Sep 2024",
 		location: "Assam, India",
 		group: "research",
+		sortKey: 70,
 		description: "Developed a ResNet50 CNN for SAR image classification achieving 80% accuracy across land cover types. Applied Lee and Gamma MAP speckle filters. Evaluated with precision, recall, F1-scores, and confusion matrices.",
 		tags: [
 			"PyTorch",
@@ -156,30 +161,13 @@ var EXPERIENCE = [
 		]
 	},
 	{
-		role: "Assistant Projects Director (Projects Mentor)",
-		company: "DS3, Data Science Student Society",
-		period: "Jul 2025 - Present",
-		location: "San Diego, CA",
-		group: "campus",
-		description: "Lead ideation and selection of 10-12+ quarterly data science projects. Mentor teams through full data pipelines, including preprocessing, feature engineering, model selection, and deployment. Coordinate timelines and evaluation metrics with senior leadership for end-of-quarter showcases.",
-		tags: ["Leadership", "Data Science"]
-	},
-	{
-		role: "Tutor / Instructional Assistant",
-		company: "Halicioglu Data Science Institute, UCSD",
-		period: "Mar 2025 - Jun 2025",
-		location: "San Diego, CA",
-		group: "campus",
-		description: "Conducted weekly discussion sections and office hours for DSC 40A covering empirical risk minimization, optimization, regression, classification, and discrete probability. Evaluated assignments and exams with structured feedback.",
-		tags: ["Machine Learning", "Teaching"]
-	},
-	{
 		role: "President",
 		company: "CSES Open Source, TritonSpend",
 		period: "Jun 2026 - Present",
 		location: "San Diego, CA",
 		featured: true,
 		group: "campus",
+		sortKey: 100,
 		description: "Lead CSES Open Source strategy, org-wide engineering initiatives, and cross-team execution while continuing to drive TritonSpend product direction and delivery.",
 		tags: [
 			"Leadership",
@@ -204,11 +192,32 @@ var EXPERIENCE = [
 		]
 	},
 	{
+		role: "Assistant Projects Director (Projects Mentor)",
+		company: "DS3, Data Science Student Society",
+		period: "Jul 2025 - Present",
+		location: "San Diego, CA",
+		group: "campus",
+		sortKey: 90,
+		description: "Lead ideation and selection of 10-12+ quarterly data science projects. Mentor teams through full data pipelines, including preprocessing, feature engineering, model selection, and deployment. Coordinate timelines and evaluation metrics with senior leadership for end-of-quarter showcases.",
+		tags: ["Leadership", "Data Science"]
+	},
+	{
+		role: "Tutor / Instructional Assistant",
+		company: "Halicioglu Data Science Institute, UCSD",
+		period: "Mar 2025 - Jun 2025",
+		location: "San Diego, CA",
+		group: "campus",
+		sortKey: 80,
+		description: "Conducted weekly discussion sections and office hours for DSC 40A covering empirical risk minimization, optimization, regression, classification, and discrete probability. Evaluated assignments and exams with structured feedback.",
+		tags: ["Machine Learning", "Teaching"]
+	},
+	{
 		role: "Quantitative Analyst",
 		company: "Triton Quantitative Trading (TQT)",
 		period: "Oct 2024 - Jan 2025",
 		location: "San Diego, CA",
 		group: "campus",
+		sortKey: 70,
 		description: "Built a hybrid LSTM/GRU forecasting model with Monte Carlo simulations (Geometric Brownian Motion). Integrated technical indicators, VADER sentiment analysis, and Sharpe Ratio risk metrics. Deployed as a modular Streamlit app with yFinance and REST API support.",
 		tags: [
 			"LSTM",
@@ -956,6 +965,9 @@ var outage_default = "/assets/outage-anTXBL1M.png";
 var pantrypal_default = "/assets/pantrypal-DAc8yZ9O.png";
 var pantrypal_win_default = "/assets/pantrypal_win-WEf3ND6r.JPG";
 var pantrypal_win1_default = "/assets/pantrypal_win1-m7lICY6o.JPG";
+var pwc_2_default = "/assets/pwc-2-C7HXWMma.png";
+var pwc_3_default = "/assets/pwc-3-BT9KdTS2.png";
+var pwc_4_default = "/assets/pwc-4-DUDuzDbA.png";
 var pwc_default = "/assets/pwc-reRWlzRL.png";
 var qwen_default = "/assets/qwen--uTpO2iB.png";
 var rl_default = "/assets/rl-D7_vDwzg.png";
@@ -1017,6 +1029,9 @@ var ASSET_ENTRIES = Object.entries(/* @__PURE__ */ Object.assign({
 	"../../assets/pantrypal.png": pantrypal_default,
 	"../../assets/pantrypal_win.JPG": pantrypal_win_default,
 	"../../assets/pantrypal_win1.JPG": pantrypal_win1_default,
+	"../../assets/pwc-2.png": pwc_2_default,
+	"../../assets/pwc-3.png": pwc_3_default,
+	"../../assets/pwc-4.png": pwc_4_default,
 	"../../assets/pwc.png": pwc_default,
 	"../../assets/qwen.png": qwen_default,
 	"../../assets/rl.png": rl_default,
@@ -1088,12 +1103,12 @@ var EXPERIENCE_LOGO_OVERRIDES = {
 	UniCircle: "unicircle",
 	"UCSD CSE (STSLab)": "cse",
 	"Engineers for Exploration (E4E)": "e4e",
-	"PwC India": "pwc",
+	"PricewaterhouseCoopers LLP (PwC)": "pwc-2",
 	"DS3, Data Science Student Society": "ds3",
 	"Halicioglu Data Science Institute, UCSD": "hdsi",
 	"CSES Open Source, TritonSpend": "cses",
 	"Triton Quantitative Trading (TQT)": "tqt",
-	"IIT Guwahati": "iitg_logo"
+	"IIT Guwahati": "IITG_logo"
 };
 var EXPERIENCE_GROUP_ICONS = {
 	industry: Briefcase,
@@ -1327,18 +1342,13 @@ function ExperienceCard({ e, idx, logoSrc, anchor, isLast }) {
 	});
 }
 function Experience() {
-	const [activeGroup, setActiveGroup] = (0, import_react.useState)("industry");
 	const getExperienceLogo = (company, role) => {
 		const overrideName = EXPERIENCE_LOGO_OVERRIDES[company];
 		if (overrideName) {
 			const overrideAsset = getAssetByFileName(overrideName);
 			if (overrideAsset) return overrideAsset;
 		}
-		return findBestAsset(company, [
-			role,
-			"logo",
-			"company"
-		]);
+		return findBestAsset(company, [role]);
 	};
 	const getExperienceAnchor = (role, company, idx) => `experience-${idx}-${normalizeAssetKey(`${role}-${company}`).replace(/\s+/g, "-")}`;
 	const groupedExperience = EXPERIENCE_GROUPS.map((g) => ({
@@ -1346,76 +1356,60 @@ function Experience() {
 		items: EXPERIENCE.map((e, idx) => ({
 			e,
 			idx
-		})).filter((row) => row.e.group === g.id)
+		})).filter((row) => row.e.group === g.id).sort((a, b) => (b.e.sortKey ?? 0) - (a.e.sortKey ?? 0))
 	}));
-	const activeSection = groupedExperience.find((g) => g.id === activeGroup) ?? groupedExperience[0];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		id: "experience",
 		className: "relative py-24 md:py-32",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "mx-auto max-w-4xl px-6",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
-					eyebrow: "Experience",
-					title: "Work & Research",
-					subtitle: "Industry, research, and campus leadership — grouped for quick scanning."
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-					className: "mb-10 flex flex-wrap justify-center gap-2",
-					children: groupedExperience.map((g) => {
-						const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
-						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-							type: "button",
-							onClick: () => setActiveGroup(g.id),
-							className: `filter-pill inline-flex items-center gap-2 ${activeGroup === g.id ? "active" : ""}`,
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 14 }),
-								g.label,
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "rounded-full bg-background/60 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums",
-									children: g.items.length
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
+				eyebrow: "Experience",
+				title: "Work & Research",
+				subtitle: "Industry, research, and campus leadership — most significant roles first in each group."
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "space-y-16",
+				children: groupedExperience.map((g) => {
+					const GroupIcon = EXPERIENCE_GROUP_ICONS[g.id];
+					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						id: `experience-group-${g.id}`,
+						className: "scroll-mt-28",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+							className: "mb-8",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-start gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 18 })
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "font-display text-lg font-semibold md:text-xl",
+										children: g.label
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "mt-1 text-sm text-muted-foreground",
+										children: g.blurb
+									})] })]
 								})
-							]
-						}, g.id);
-					})
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "space-y-8",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "rounded-2xl border border-border/80 bg-card/40 px-5 py-4 md:px-6",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-start gap-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary",
-								children: (() => {
-									const GroupIcon = EXPERIENCE_GROUP_ICONS[activeSection.id];
-									return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GroupIcon, { size: 18 });
-								})()
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-								className: "font-display text-lg font-semibold md:text-xl",
-								children: activeSection.label
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "mt-1 text-sm text-muted-foreground",
-								children: activeSection.blurb
-							})] })]
-						})
-					}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "relative space-y-8",
-						children: activeSection.items.map(({ e, idx }, itemIdx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExperienceCard, {
-							e,
-							idx: itemIdx,
-							logoSrc: getExperienceLogo(e.company, e.role),
-							anchor: getExperienceAnchor(e.role, e.company, idx),
-							isLast: itemIdx === activeSection.items.length - 1
-						}, `${e.company}-${idx}`))
-					})]
-				}, activeSection.id)
-			]
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "relative space-y-8",
+							children: g.items.map(({ e, idx }, itemIdx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExperienceCard, {
+								e,
+								idx: itemIdx,
+								logoSrc: getExperienceLogo(e.company, e.role),
+								anchor: getExperienceAnchor(e.role, e.company, idx),
+								isLast: itemIdx === g.items.length - 1
+							}, `${e.company}-${idx}`))
+						})]
+					}, g.id);
+				})
+			})]
 		})
 	});
 }
 function Projects() {
-	const [activeFilters, setActiveFilters] = (0, import_react.useState)(["latest"]);
+	const [activeFilters, setActiveFilters] = (0, import_react.useState)([]);
 	const getProjectImage = (title, stack) => {
 		const overrideName = PROJECT_IMAGE_OVERRIDES[title];
 		if (overrideName) {
