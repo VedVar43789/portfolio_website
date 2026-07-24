@@ -1,12 +1,12 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-C6r6wd_c.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DMuxsUOp.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
 	github: "https://github.com/VedVar43789",
-	linkedin: "https://www.linkedin.com/in/vedant-vardhaan-152280256/",
+	linkedin: "https://www.linkedin.com/in/vedantvardhaan/",
 	email: "vvardhaan@ucsd.edu",
 	resumeSWE: "/assets/Vedant_Vardhaan_SWE-2.pdf",
 	resumeAIML: "/assets/Vedant_Vardhaan_AI_ML_Engineer-2.pdf",
