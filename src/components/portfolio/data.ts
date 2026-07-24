@@ -2,8 +2,8 @@ export const LINKS = {
   github: "https://github.com/VedVar43789",
   linkedin: "https://www.linkedin.com/in/vedantvardhaan/",
   email: "vvardhaan@ucsd.edu",
-  resumeSWE: "/assets/Vedant_Vardhaan_SWE-2.pdf",
-  resumeAIML: "/assets/Vedant_Vardhaan_AI_ML_Engineer-2.pdf",
+  resumeSWE: "/assets/Vedant_Vardhaan_SWE-2.pdf?v=20260724",
+  resumeAIML: "/assets/Vedant_Vardhaan_AI_ML_Engineer-2.pdf?v=20260724",
   formspree: "https://formspree.io/f/xgvkjvro",
 };
 
