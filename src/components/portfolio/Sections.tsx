@@ -69,6 +69,8 @@ const PROJECT_IMAGE_OVERRIDES: Record<string, string> = {
 };
 
 const EXPERIENCE_LOGO_OVERRIDES: Record<string, string> = {
+  "Metro Infrasys": "metro",
+  Oaken: "oaken",
   UniCircle: "unicircle",
   "UCSD CSE (STSLab)": "cse",
   "Engineers for Exploration (E4E)": "e4e",

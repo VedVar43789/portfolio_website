@@ -82,22 +82,44 @@ export const EXPERIENCE: Experience[] = [
     location: "Gurugram, India",
     featured: true,
     group: "industry",
-    sortKey: 100,
+    sortKey: 110,
     description:
       "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
     tags: ["LangGraph", "Gemini 2.5 Pro", "Agentic AI", "Generative AI", "AWS", "Azure", "GCP", "Tableau"],
+  },
+  {
+    role: "AI Engineer Intern",
+    company: "Oaken",
+    period: "Jul 2026 - Present",
+    location: "Indianapolis, IN",
+    meta: "Hybrid",
+    group: "industry",
+    sortKey: 100,
+    description:
+      "Partner with the CEO and CTO to design an agentic AI system that generates branded annual client reports from farmland lease and payment data, architecting workflows that reason over each report, orchestrate tool calls, and deliver output without manual compilation. Built a verification layer that cross-checks figures against source data through deterministic tool calls with strict production-year isolation, and engineered the GCP stack with integrated LLMs using prompt and context engineering for a proof-of-concept ahead of premium platform rollout.",
+    tags: ["GCP", "Agentic AI", "LLMs", "Prompt Engineering", "Generative AI"],
   },
   {
     role: "Chief Technology Officer & Full Stack Engineer",
     company: "UniCircle",
     period: "May 2026 - Present",
     location: "San Diego, CA",
-    featured: true,
     group: "industry",
     sortKey: 90,
     description:
       "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
     tags: ["React", "TypeScript", "Supabase", "Vercel"],
+  },
+  {
+    role: "Software Engineer Intern (Computer Vision)",
+    company: "Metro Infrasys",
+    period: "Jul 2026 - Aug 2026",
+    location: "Remote",
+    group: "industry",
+    sortKey: 80,
+    description:
+      "Developed Lane Toll Audit, an automated computer vision system that processes traffic and toll-plaza video to detect, track, and count vehicles by lane using YOLOv8n and ByteTrack, replacing frame-by-frame human review with an automated detection workflow. Built the pipeline within ATMS/TMS (advanced traffic and toll management systems) contexts to turn raw highway video into structured, auditable lane and toll data.",
+    tags: ["YOLOv8", "ByteTrack", "Computer Vision", "Python"],
   },
   {
     role: "Applied AI Research Assistant",

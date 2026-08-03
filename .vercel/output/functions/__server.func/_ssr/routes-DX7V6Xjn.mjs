@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CvXM3PQf.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DX7V6Xjn.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -86,7 +86,7 @@ var EXPERIENCE = [
 		location: "Gurugram, India",
 		featured: true,
 		group: "industry",
-		sortKey: 100,
+		sortKey: 110,
 		description: "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
 		tags: [
 			"LangGraph",
@@ -100,11 +100,27 @@ var EXPERIENCE = [
 		]
 	},
 	{
+		role: "AI Engineer Intern",
+		company: "Oaken",
+		period: "Jul 2026 - Present",
+		location: "Indianapolis, IN",
+		meta: "Hybrid",
+		group: "industry",
+		sortKey: 100,
+		description: "Partner with the CEO and CTO to design an agentic AI system that generates branded annual client reports from farmland lease and payment data, architecting workflows that reason over each report, orchestrate tool calls, and deliver output without manual compilation. Built a verification layer that cross-checks figures against source data through deterministic tool calls with strict production-year isolation, and engineered the GCP stack with integrated LLMs using prompt and context engineering for a proof-of-concept ahead of premium platform rollout.",
+		tags: [
+			"GCP",
+			"Agentic AI",
+			"LLMs",
+			"Prompt Engineering",
+			"Generative AI"
+		]
+	},
+	{
 		role: "Chief Technology Officer & Full Stack Engineer",
 		company: "UniCircle",
 		period: "May 2026 - Present",
 		location: "San Diego, CA",
-		featured: true,
 		group: "industry",
 		sortKey: 90,
 		description: "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
@@ -113,6 +129,21 @@ var EXPERIENCE = [
 			"TypeScript",
 			"Supabase",
 			"Vercel"
+		]
+	},
+	{
+		role: "Software Engineer Intern (Computer Vision)",
+		company: "Metro Infrasys",
+		period: "Jul 2026 - Aug 2026",
+		location: "Remote",
+		group: "industry",
+		sortKey: 80,
+		description: "Developed Lane Toll Audit, an automated computer vision system that processes traffic and toll-plaza video to detect, track, and count vehicles by lane using YOLOv8n and ByteTrack, replacing frame-by-frame human review with an automated detection workflow. Built the pipeline within ATMS/TMS (advanced traffic and toll management systems) contexts to turn raw highway video into structured, auditable lane and toll data.",
+		tags: [
+			"YOLOv8",
+			"ByteTrack",
+			"Computer Vision",
+			"Python"
 		]
 	},
 	{
@@ -961,6 +992,8 @@ var knn_default = "/assets/knn-C1RsI4gD.png";
 var knn1_default = "/assets/knn1-ZeWZT3OX.png";
 var lib_default = "/assets/lib-Br3kIZ-D.png";
 var market_default = "/assets/market-CFrgfcGU.png";
+var metro_default = "/assets/metro-CG6jlvKr.png";
+var oaken_default = "/assets/oaken-DtytXD7k.png";
 var outage_default = "/assets/outage-anTXBL1M.png";
 var pantrypal_default = "/assets/pantrypal-DAc8yZ9O.png";
 var pantrypal_win_default = "/assets/pantrypal_win-WEf3ND6r.JPG";
@@ -1025,6 +1058,8 @@ var ASSET_ENTRIES = Object.entries(/* @__PURE__ */ Object.assign({
 	"../../assets/knn1.png": knn1_default,
 	"../../assets/lib.png": lib_default,
 	"../../assets/market.png": market_default,
+	"../../assets/metro.png": metro_default,
+	"../../assets/oaken.png": oaken_default,
 	"../../assets/outage.png": outage_default,
 	"../../assets/pantrypal.png": pantrypal_default,
 	"../../assets/pantrypal_win.JPG": pantrypal_win_default,
@@ -1100,6 +1135,8 @@ var PROJECT_IMAGE_OVERRIDES = {
 	"Song Recommender": "song"
 };
 var EXPERIENCE_LOGO_OVERRIDES = {
+	"Metro Infrasys": "metro",
+	Oaken: "oaken",
 	UniCircle: "unicircle",
 	"UCSD CSE (STSLab)": "cse",
 	"Engineers for Exploration (E4E)": "e4e",
