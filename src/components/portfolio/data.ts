@@ -172,6 +172,17 @@ export const EXPERIENCE: Experience[] = [
     ],
   },
   {
+    role: "Resident Assistant (RA)",
+    company: "UCSD Eighth College",
+    period: "Aug 2026 - Present",
+    location: "San Diego, CA",
+    group: "campus",
+    sortKey: 95,
+    description:
+      "Serve as Resident Assistant for 52 residents at UCSD Eighth College, building community through residential programming, conflict mediation, and one-on-one support. Act as a first point of contact for student concerns and coordinate with college staff on safety, wellbeing, and campus resources.",
+    tags: ["Leadership", "Community Building", "Student Support"],
+  },
+  {
     role: "Assistant Projects Director (Projects Mentor)",
     company: "DS3, Data Science Student Society",
     period: "Jul 2025 - Present",

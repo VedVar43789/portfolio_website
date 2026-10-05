@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DX7V6Xjn.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-Cj_g2OAk.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -220,6 +220,20 @@ var EXPERIENCE = [
 				period: "Jun 2026 - Present",
 				current: true
 			}
+		]
+	},
+	{
+		role: "Resident Assistant (RA)",
+		company: "UCSD Eighth College",
+		period: "Aug 2026 - Present",
+		location: "San Diego, CA",
+		group: "campus",
+		sortKey: 95,
+		description: "Serve as Resident Assistant for 52 residents at UCSD Eighth College, building community through residential programming, conflict mediation, and one-on-one support. Act as a first point of contact for student concerns and coordinate with college staff on safety, wellbeing, and campus resources.",
+		tags: [
+			"Leadership",
+			"Community Building",
+			"Student Support"
 		]
 	},
 	{
@@ -979,6 +993,7 @@ function Hero() {
 	});
 }
 var _106_default = "/assets/106-CDSSooxU.png";
+var Eighth_College_logo_default = "/assets/Eighth_College_logo-KciVDz-5.svg";
 var IITG_logo_default = "/assets/IITG_logo-Bz6GQUC3.png";
 var blood_default = "/assets/blood-Blnkgmso.png";
 var cse_default = "/assets/cse-CjmFAesG.png";
@@ -1045,6 +1060,7 @@ function Reveal({ children, delay = 0, as: Tag = "div", className = "" }) {
 }
 var ASSET_ENTRIES = Object.entries(/* @__PURE__ */ Object.assign({
 	"../../assets/106.png": _106_default,
+	"../../assets/Eighth_College_logo.svg": Eighth_College_logo_default,
 	"../../assets/IITG_logo.png": IITG_logo_default,
 	"../../assets/blood.png": blood_default,
 	"../../assets/cse.png": cse_default,
@@ -1144,6 +1160,7 @@ var EXPERIENCE_LOGO_OVERRIDES = {
 	"DS3, Data Science Student Society": "ds3",
 	"Halicioglu Data Science Institute, UCSD": "hdsi",
 	"CSES Open Source, TritonSpend": "cses",
+	"UCSD Eighth College": "Eighth_College_logo",
 	"Triton Quantitative Trading (TQT)": "tqt",
 	"IIT Guwahati": "IITG_logo"
 };

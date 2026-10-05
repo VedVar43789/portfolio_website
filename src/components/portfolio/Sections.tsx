@@ -78,6 +78,7 @@ const EXPERIENCE_LOGO_OVERRIDES: Record<string, string> = {
   "DS3, Data Science Student Society": "ds3",
   "Halicioglu Data Science Institute, UCSD": "hdsi",
   "CSES Open Source, TritonSpend": "cses",
+  "UCSD Eighth College": "Eighth_College_logo",
   "Triton Quantitative Trading (TQT)": "tqt",
   "IIT Guwahati": "IITG_logo",
 };
