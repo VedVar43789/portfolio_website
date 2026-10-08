@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-Cj_g2OAk.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CNRFw5mS.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -1001,6 +1001,7 @@ var cses_default = "/assets/cses-CIWzPNcI.png";
 var ds3_default = "/assets/ds3-3AwPNkLG.png";
 var e4e_default = "/assets/e4e-BUqainT0.png";
 var earth_default = "/assets/earth-C5kuUtyE.png";
+var eighth_default = "/assets/eighth-PrP10bTY.png";
 var hdsi_default = "/assets/hdsi-DE0jKGK3.png";
 var invasive_default = "/assets/invasive-YQWCgH2X.png";
 var knn_default = "/assets/knn-C1RsI4gD.png";
@@ -1068,6 +1069,7 @@ var ASSET_ENTRIES = Object.entries(/* @__PURE__ */ Object.assign({
 	"../../assets/ds3.png": ds3_default,
 	"../../assets/e4e.png": e4e_default,
 	"../../assets/earth.png": earth_default,
+	"../../assets/eighth.png": eighth_default,
 	"../../assets/hdsi.png": hdsi_default,
 	"../../assets/invasive.png": invasive_default,
 	"../../assets/knn.png": knn_default,
@@ -1160,7 +1162,7 @@ var EXPERIENCE_LOGO_OVERRIDES = {
 	"DS3, Data Science Student Society": "ds3",
 	"Halicioglu Data Science Institute, UCSD": "hdsi",
 	"CSES Open Source, TritonSpend": "cses",
-	"UCSD Eighth College": "Eighth_College_logo",
+	"UCSD Eighth College": "eighth",
 	"Triton Quantitative Trading (TQT)": "tqt",
 	"IIT Guwahati": "IITG_logo"
 };
