@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as Briefcase, a as Send, c as MapPin, d as GraduationCap, f as Github, g as ChevronDown, h as ExternalLink, i as Star, l as Mail, m as FileText, n as Users, o as Moon, p as FlaskConical, r as Sun, s as Menu, t as X, u as Linkedin, v as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CNRFw5mS.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-Dn_sqK2F.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -319,6 +319,27 @@ var PROJECT_FILTERS = [
 	}
 ];
 var PROJECTS = [...[
+	{
+		title: "Worth Your Read",
+		period: "October 2026",
+		description: "MCP tool that verifies AI citations by grounding each claim in the Results section of the cited paper and returning a confidence score with a ranked source list. Won best project in the preventing hallucinations and confidently wrong outputs track at the Claude Impact Lab in San Diego.",
+		stack: [
+			"MCP",
+			"Claude API",
+			"Python",
+			"FastMCP",
+			"RAG",
+			"Crossref"
+		],
+		github: "https://github.com/VedVar43789/worth-the-read",
+		demo: "https://fedor-i.github.io/WorthTheRead/",
+		tags: [
+			"ml",
+			"nlp",
+			"api"
+		],
+		sortKey: 202610
+	},
 	{
 		title: "TumorSense",
 		period: "Spring 2026",
@@ -648,6 +669,10 @@ var SKILLS = [
 			"LangGraph",
 			"Agentic AI",
 			"MCP",
+			"FastMCP",
+			"Anthropic Claude API",
+			"Crossref API",
+			"NCBI PMC BioC",
 			"Claude Code",
 			"Cursor",
 			"RAG",
@@ -1032,6 +1057,7 @@ var tumor_default = "/assets/tumor-C_k7vS6G.png";
 var ucsd_default = "/assets/ucsd-6lfHeU3-.png";
 var unicircle_default = "/assets/unicircle-BzDD6j6J.png";
 var vv_default = "/assets/vv-DgYvIuPt.png";
+var worthyourread_default = "/assets/worthyourread-BeVjCCVA.png";
 function Reveal({ children, delay = 0, as: Tag = "div", className = "" }) {
 	const ref = (0, import_react.useRef)(null);
 	const [visible, setVisible] = (0, import_react.useState)(false);
@@ -1100,7 +1126,8 @@ var ASSET_ENTRIES = Object.entries(/* @__PURE__ */ Object.assign({
 	"../../assets/ucsd.png": ucsd_default,
 	"../../assets/unicircle.png": unicircle_default,
 	"../../assets/vedant_ds3.jpg": vedant_ds3_default,
-	"../../assets/vv.png": vv_default
+	"../../assets/vv.png": vv_default,
+	"../../assets/worthyourread.png": worthyourread_default
 })).map(([path, src]) => {
 	return {
 		src,
@@ -1134,6 +1161,7 @@ function findBestAsset(query, extras = []) {
 	return scored[0].entry.src;
 }
 var PROJECT_IMAGE_OVERRIDES = {
+	"Worth Your Read": "worthyourread",
 	TumorSense: "tumor",
 	"Math Reasoning (Qwen3-4B-Thinking)": "qwen",
 	"Invasive Species Tracker": "invasive",
@@ -1482,7 +1510,7 @@ function Experience() {
 	});
 }
 function Projects() {
-	const [activeFilters, setActiveFilters] = (0, import_react.useState)([]);
+	const [activeFilters, setActiveFilters] = (0, import_react.useState)(["latest"]);
 	const getProjectImage = (title, stack) => {
 		const overrideName = PROJECT_IMAGE_OVERRIDES[title];
 		if (overrideName) {
@@ -1494,7 +1522,7 @@ function Projects() {
 	const filtered = (0, import_react.useMemo)(() => {
 		const useLatest = activeFilters.includes("latest");
 		const tagFilters = activeFilters.filter((f) => f !== "latest");
-		const base = useLatest ? PROJECTS.slice(0, 6) : PROJECTS;
+		const base = useLatest ? PROJECTS.slice(0, 3) : PROJECTS;
 		if (tagFilters.length === 0) return base;
 		return base.filter((p) => tagFilters.every((f) => p.tags.includes(f)));
 	}, [activeFilters]);
@@ -1574,12 +1602,14 @@ function Projects() {
 											href: p.github,
 											target: "_blank",
 											rel: "noreferrer",
+											"aria-label": `View ${p.title} source code on GitHub`,
 											className: "inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Github, { size: 15 }), " Code"]
 										}), p.demo && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 											href: p.demo,
 											target: "_blank",
 											rel: "noreferrer",
+											"aria-label": `Open ${p.title} demo`,
 											className: "inline-flex items-center gap-1.5 text-primary hover:text-cyan transition",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, { size: 15 }), " Demo"]
 										})]

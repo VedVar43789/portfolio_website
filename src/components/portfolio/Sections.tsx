@@ -49,6 +49,7 @@ function findBestAsset(query: string, extras: string[] = []) {
 }
 
 const PROJECT_IMAGE_OVERRIDES: Record<string, string> = {
+  "Worth Your Read": "worthyourread",
   TumorSense: "tumor",
   "Math Reasoning (Qwen3-4B-Thinking)": "qwen",
   "Invasive Species Tracker": "invasive",
@@ -373,7 +374,7 @@ export function Experience() {
 }
 
 export function Projects() {
-  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  const [activeFilters, setActiveFilters] = useState<string[]>(["latest"]);
   const getProjectImage = (title: string, stack: string[]) => {
     const overrideName = PROJECT_IMAGE_OVERRIDES[title];
     if (overrideName) {
@@ -386,7 +387,7 @@ export function Projects() {
   const filtered = useMemo(() => {
     const useLatest = activeFilters.includes("latest");
     const tagFilters = activeFilters.filter((f) => f !== "latest");
-    const base = useLatest ? PROJECTS.slice(0, 6) : PROJECTS;
+    const base = useLatest ? PROJECTS.slice(0, 3) : PROJECTS;
     if (tagFilters.length === 0) return base;
     return base.filter((p) => tagFilters.every((f) => p.tags.includes(f)));
   }, [activeFilters]);
@@ -457,12 +458,24 @@ export function Projects() {
                 </div>
                 <div className="mt-5 flex items-center gap-4 text-sm">
                   {p.github && (
-                    <a href={p.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition">
+                    <a
+                      href={p.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`View ${p.title} source code on GitHub`}
+                      className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition"
+                    >
                       <Github size={15} /> Code
                     </a>
                   )}
                   {p.demo && (
-                    <a href={p.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:text-cyan transition">
+                    <a
+                      href={p.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Open ${p.title} demo`}
+                      className="inline-flex items-center gap-1.5 text-primary hover:text-cyan transition"
+                    >
                       <ExternalLink size={15} /> Demo
                     </a>
                   )}

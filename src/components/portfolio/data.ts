@@ -244,6 +244,17 @@ export const PROJECT_FILTERS = [
 
 const PROJECTS_RAW: Project[] = [
   {
+    title: "Worth Your Read",
+    period: "October 2026",
+    description:
+      "MCP tool that verifies AI citations by grounding each claim in the Results section of the cited paper and returning a confidence score with a ranked source list. Won best project in the preventing hallucinations and confidently wrong outputs track at the Claude Impact Lab in San Diego.",
+    stack: ["MCP", "Claude API", "Python", "FastMCP", "RAG", "Crossref"],
+    github: "https://github.com/VedVar43789/worth-the-read",
+    demo: "https://fedor-i.github.io/WorthTheRead/",
+    tags: ["ml", "nlp", "api"],
+    sortKey: 202610,
+  },
+  {
     title: "TumorSense",
     period: "Spring 2026",
     description:
@@ -442,6 +453,10 @@ export const SKILLS: { group: string; items: string[] }[] = [
       "LangGraph",
       "Agentic AI",
       "MCP",
+      "FastMCP",
+      "Anthropic Claude API",
+      "Crossref API",
+      "NCBI PMC BioC",
       "Claude Code",
       "Cursor",
       "RAG",
