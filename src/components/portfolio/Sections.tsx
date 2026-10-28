@@ -244,7 +244,14 @@ function ExperienceCard({
             </p>
           </div>
 
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{e.description}</p>
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+            {e.bullets.map((bullet) => (
+              <li key={bullet} className="flex gap-2.5">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
 
           {e.progression && e.progression.length > 0 && (
             <div className="mt-5 rounded-xl border border-border/70 bg-background/35 p-4">

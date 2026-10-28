@@ -62,7 +62,7 @@ export type Experience = {
   period: string;
   location?: string;
   meta?: string;
-  description: string;
+  bullets: string[];
   tags?: string[];
   featured?: boolean;
   group: ExperienceGroupId;
@@ -83,31 +83,40 @@ export const EXPERIENCE: Experience[] = [
     featured: true,
     group: "industry",
     sortKey: 110,
-    description:
-      "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services. Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%. Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
+    bullets: [
+      "Built an agentic AI chatbot for natural language AWS/Azure/GCP onboarding across 15+ cloud services.",
+      "Designed multi-agent orchestration with LangGraph, Gemini 2.5 Pro, and LangChain, cutting manual configuration time by 60%.",
+      "Implemented secure credential management, automated baseline security with Azure Key Vault, and Tableau-ready reporting outputs for stakeholder visibility.",
+    ],
     tags: ["LangGraph", "Gemini 2.5 Pro", "Agentic AI", "Generative AI", "AWS", "Azure", "GCP", "Tableau"],
   },
   {
     role: "AI Engineer Intern",
     company: "Oaken",
-    period: "Jul 2026 - Present",
+    period: "Jul 2026 - Oct 2026",
     location: "Indianapolis, IN",
     meta: "Hybrid",
     group: "industry",
     sortKey: 100,
-    description:
-      "Partner with the CEO and CTO to design an agentic AI system that generates branded annual client reports from farmland lease and payment data, architecting workflows that reason over each report, orchestrate tool calls, and deliver output without manual compilation. Built a verification layer that cross-checks figures against source data through deterministic tool calls with strict production-year isolation, and engineered the GCP stack with integrated LLMs using prompt and context engineering for a proof-of-concept ahead of premium platform rollout.",
-    tags: ["GCP", "Agentic AI", "LLMs", "Prompt Engineering", "Generative AI"],
+    bullets: [
+      "Partnered with the CEO and CTO to build a proof-of-concept that turns mixed farm Word and PDF files into one branded landowner report, using one LangGraph pipeline and a YAML profile per company.",
+      "The engine ingests documents, filters records by crop year, and writes a year-to-date or year-end Word file as per-field agronomic notes or a whole-farm financial letter. Claude or Gemini drafts the narrative, with local templates as a fallback; tables, charts, and captions come from code.",
+      "A verifier requires every figure to already exist in the parsed source data. Shipped a Flask upload app on Railway, with OCR for scanned pages, pytest evals, and GitHub Actions CI.",
+    ],
+    tags: ["LangGraph", "Claude", "Gemini", "Flask", "Pydantic", "Agentic AI"],
   },
   {
     role: "Chief Technology Officer & Full Stack Engineer",
     company: "UniCircle",
-    period: "May 2026 - Present",
+    period: "May 2026 - Oct 2026",
     location: "San Diego, CA",
     group: "industry",
     sortKey: 90,
-    description:
-      "Own all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel). Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL. Lead engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
+    bullets: [
+      "Owned all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel).",
+      "Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL.",
+      "Led engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
+    ],
     tags: ["React", "TypeScript", "Supabase", "Vercel"],
   },
   {
@@ -117,8 +126,11 @@ export const EXPERIENCE: Experience[] = [
     location: "Remote",
     group: "industry",
     sortKey: 80,
-    description:
-      "Developed Lane Toll Audit, an automated computer vision system that processes traffic and toll-plaza video to detect, track, and count vehicles by lane using YOLOv8n and ByteTrack, replacing frame-by-frame human review with an automated detection workflow. Built the pipeline within ATMS/TMS (advanced traffic and toll management systems) contexts to turn raw highway video into structured, auditable lane and toll data.",
+    bullets: [
+      "Developed Lane Toll Audit, an automated computer vision system that detects, tracks, and counts vehicles by lane in traffic and toll-plaza video using YOLOv8n and ByteTrack.",
+      "Replaced frame-by-frame human review with an automated detection workflow inside ATMS/TMS contexts.",
+      "Turned raw highway video into structured, auditable lane and toll data.",
+    ],
     tags: ["YOLOv8", "ByteTrack", "Computer Vision", "Python"],
   },
   {
@@ -128,8 +140,11 @@ export const EXPERIENCE: Experience[] = [
     location: "San Diego, CA",
     group: "research",
     sortKey: 100,
-    description:
-      "Research with Prof. Deepak Kumar (UCSD) and Prof. Jeremy D. Foote (Purdue) on chatbot-driven interventions and Reddit user behavior. Co-authoring a paper on whether AI-mediated conversations can reduce toxic discourse at scale. Built data pipelines and evaluation workflows for generative AI and agentic AI research, including MCP-based tooling and model analysis.",
+    bullets: [
+      "Research with Prof. Deepak Kumar (UCSD) and Prof. Jeremy D. Foote (Purdue) on chatbot-driven interventions and Reddit user behavior.",
+      "Co-authoring a paper on whether AI-mediated conversations can reduce toxic discourse at scale.",
+      "Built data pipelines and evaluation workflows for generative AI and agentic AI research, including MCP-based tooling and model analysis.",
+    ],
     tags: ["LLMs", "Applied ML", "Generative AI", "Agentic AI", "MCP"],
   },
   {
@@ -139,8 +154,10 @@ export const EXPERIENCE: Experience[] = [
     location: "San Diego, CA",
     group: "research",
     sortKey: 90,
-    description:
-      "Lead an interdisciplinary team building an AI system that predicts mangrove presence by fusing drone imagery and Sentinel-2 satellite data for Scripps Institution of Oceanography. Oversee data pipelines, feature fusion, and model integration with Python, TensorFlow, NumPy, and Google Earth Engine.",
+    bullets: [
+      "Led an interdisciplinary team building an AI system that predicts mangrove presence by fusing drone imagery and Sentinel-2 satellite data for Scripps Institution of Oceanography.",
+      "Oversaw data pipelines, feature fusion, and model integration with Python, TensorFlow, NumPy, and Google Earth Engine.",
+    ],
     tags: ["TensorFlow", "Google Earth Engine", "Sentinel-2"],
   },
   {
@@ -150,8 +167,11 @@ export const EXPERIENCE: Experience[] = [
     location: "Assam, India",
     group: "research",
     sortKey: 70,
-    description:
-      "Developed a ResNet50 CNN for SAR image classification achieving 80% accuracy across land cover types. Applied Lee and Gamma MAP speckle filters. Evaluated with precision, recall, F1-scores, and confusion matrices.",
+    bullets: [
+      "Developed a ResNet50 CNN for SAR image classification achieving 80% accuracy across land cover types.",
+      "Applied Lee and Gamma MAP speckle filters.",
+      "Evaluated with precision, recall, F1-scores, and confusion matrices.",
+    ],
     tags: ["PyTorch", "SAR", "CNN", "ResNet50"],
   },
   {
@@ -162,8 +182,10 @@ export const EXPERIENCE: Experience[] = [
     featured: true,
     group: "campus",
     sortKey: 100,
-    description:
-      "Lead CSES Open Source strategy, org-wide engineering initiatives, and cross-team execution while continuing to drive TritonSpend product direction and delivery.",
+    bullets: [
+      "Lead CSES Open Source strategy, org-wide engineering initiatives, and cross-team execution.",
+      "Drive TritonSpend product direction and delivery.",
+    ],
     tags: ["Leadership", "React Native", "Node.js", "PostgreSQL"],
     progression: [
       { role: "Software Developer", period: "Nov 2024 - Jul 2025" },
@@ -178,8 +200,10 @@ export const EXPERIENCE: Experience[] = [
     location: "San Diego, CA",
     group: "campus",
     sortKey: 95,
-    description:
-      "Serve as Resident Assistant for 52 residents at UCSD Eighth College, building community through residential programming, conflict mediation, and one-on-one support. Act as a first point of contact for student concerns and coordinate with college staff on safety, wellbeing, and campus resources.",
+    bullets: [
+      "Serve as Resident Assistant for 52 residents at UCSD Eighth College, building community through residential programming, conflict mediation, and one-on-one support.",
+      "Act as a first point of contact for student concerns and coordinate with college staff on safety, wellbeing, and campus resources.",
+    ],
     tags: ["Leadership", "Community Building", "Student Support"],
   },
   {
@@ -189,8 +213,11 @@ export const EXPERIENCE: Experience[] = [
     location: "San Diego, CA",
     group: "campus",
     sortKey: 90,
-    description:
-      "Lead ideation and selection of 10-12+ quarterly data science projects. Mentor teams through full data pipelines, including preprocessing, feature engineering, model selection, and deployment. Coordinate timelines and evaluation metrics with senior leadership for end-of-quarter showcases.",
+    bullets: [
+      "Lead ideation and selection of 10-12+ quarterly data science projects.",
+      "Mentor teams through full data pipelines, including preprocessing, feature engineering, model selection, and deployment.",
+      "Coordinate timelines and evaluation metrics with senior leadership for end-of-quarter showcases.",
+    ],
     tags: ["Leadership", "Data Science"],
   },
   {
@@ -200,8 +227,10 @@ export const EXPERIENCE: Experience[] = [
     location: "San Diego, CA",
     group: "campus",
     sortKey: 80,
-    description:
-      "Conducted weekly discussion sections and office hours for DSC 40A covering empirical risk minimization, optimization, regression, classification, and discrete probability. Evaluated assignments and exams with structured feedback.",
+    bullets: [
+      "Conducted weekly discussion sections and office hours for DSC 40A covering empirical risk minimization, optimization, regression, classification, and discrete probability.",
+      "Evaluated assignments and exams with structured feedback.",
+    ],
     tags: ["Machine Learning", "Teaching"],
   },
   {
@@ -211,8 +240,11 @@ export const EXPERIENCE: Experience[] = [
     location: "San Diego, CA",
     group: "campus",
     sortKey: 70,
-    description:
-      "Built a hybrid LSTM/GRU forecasting model with Monte Carlo simulations (Geometric Brownian Motion). Integrated technical indicators, VADER sentiment analysis, and Sharpe Ratio risk metrics. Deployed as a modular Streamlit app with yFinance and REST API support.",
+    bullets: [
+      "Built a hybrid LSTM/GRU forecasting model with Monte Carlo simulations (Geometric Brownian Motion).",
+      "Integrated technical indicators, VADER sentiment analysis, and Sharpe Ratio risk metrics.",
+      "Deployed as a modular Streamlit app with yFinance and REST API support.",
+    ],
     tags: ["LSTM", "GRU", "Streamlit", "Monte Carlo"],
   },
 ];
