@@ -293,7 +293,7 @@ const PROJECTS_RAW: Project[] = [
       "Built an end-to-end breast tumor classification system combining WDBC SVMs and IDC image models (CNN/ViT) with FastAPI inference, explainability modules, and production deployment. Achieved 98% malignant recall, 98% precision, and 0.995 ROC-AUC.",
     stack: ["Next.js", "TypeScript", "FastAPI", "scikit-learn", "PyTorch", "Hugging Face"],
     github: "https://github.com/nathaniel-trueba/TumorSense",
-    demo: "https://tumorsense-n70xj8pny-ntrueba-5031s-projects.vercel.app/#developers",
+    demo: "https://tumorsense-production.up.railway.app",
     tags: ["ml", "cv", "nlp", "api", "backend", "dataviz"],
     sortKey: 202606,
   },

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { gsap, isFinePointer, prefersReducedMotion, useGSAP } from "@/lib/motion/gsap";
 import { useIntro } from "@/hooks/use-intro";
@@ -7,6 +7,8 @@ import { SplitWords } from "@/components/generals/split-words";
 import { Timecode } from "@/components/generals/timecode";
 import { LINKS } from "@/components/portfolio/data";
 import { media, orgLogos, projectCovers } from "@/constants/media";
+import { attachHeroLens } from "@/lib/hero-lens";
+import { cn } from "@/lib/utils";
 
 const scatterCards = [
   { image: projectCovers["PantryPal, Smart Recipe Recommender"], x: "14%", y: "10%", r: -8, label: "Vision", tag: "ML" },
@@ -20,17 +22,57 @@ const scatterCards = [
 const lineClass =
   "block font-wide text-[clamp(2.6rem,12vw,17rem)] font-semibold uppercase leading-[0.8] tracking-[-0.055em]";
 
+/** The big name. Rendered twice: once as the white blended title, once as the mint x-ray copy clipped to the portrait. */
+function Headline({ xray = false }: { xray?: boolean }) {
+  const Tag = xray ? "div" : "h1";
+
+  return (
+    <Tag
+      className={cn("gutter relative w-full", xray ? "text-[#a6e8c4]" : "z-10 text-white mix-blend-difference")}
+      data-intro=""
+      data-hero-line=""
+      data-hero-pointer-text=""
+    >
+      <span className={lineClass} data-hero-row="1">
+        <span className="block" data-hero-row-inner="" data-dir="l">
+          <SplitWords text="Vedant" />
+        </span>
+      </span>
+
+      <span className="block text-right" data-hero-row="2">
+        <span className="inline-block" data-hero-row-inner="" data-dir="r">
+          <SplitWords
+            text="Vardhaan"
+            className="inline-block pr-[2vw] font-serif text-[clamp(3rem,13.5vw,19rem)] font-normal italic leading-[0.86] tracking-[-0.03em]"
+          />
+        </span>
+      </span>
+
+      <span className={`${lineClass} relative pl-[8vw]`} data-hero-row="3">
+        <span className="eyebrow absolute left-[clamp(1.25rem,3.2vw,2.75rem)] top-[14%] hidden font-sans text-[0.7rem] font-normal leading-tight tracking-[0.14em] md:block">
+          AI
+          <br />
+          Systems
+        </span>
+        <span className="block" data-hero-row-inner="" data-dir="l">
+          <SplitWords text="Engineer" />
+        </span>
+      </span>
+    </Tag>
+  );
+}
+
 export function Hero() {
   const scope = useRef<HTMLElement>(null);
+  const xrayRef = useRef<HTMLDivElement>(null);
 
   useIntro(scope, (timeline, root) => {
-    const words = root.querySelectorAll("[data-hero-line] [data-word]");
+    const lines = root.querySelectorAll("[data-hero-line]");
     const frame = root.querySelector("[data-hero-frame]");
     const figure = root.querySelector("[data-hero-figure]");
     const bbox = root.querySelector("[data-hero-bbox]");
     const meta = root.querySelectorAll("[data-hero-meta]");
     const hud = root.querySelectorAll("[data-hero-hud]");
-    const rows = root.querySelectorAll("[data-hero-row-inner]");
     const bloom = root.querySelector("[data-hero-bloom]");
     const badge = root.querySelector("[data-hero-badge]");
     const score = root.querySelector<HTMLElement>("[data-hero-score]");
@@ -44,12 +86,20 @@ export function Hero() {
         0,
       )
       .from(figure, { yPercent: 14, autoAlpha: 0, duration: 1.8, ease: "expo.out" }, 0.5)
-      .from(rows, { xPercent: (index: number) => (index % 2 === 0 ? -14 : 14), duration: 1.8, stagger: 0.08 }, 0.3)
-      .from(words, { yPercent: 120, rotate: 6, duration: 1.4, stagger: 0.1 }, 0.35)
       .from(hud, { autoAlpha: 0, duration: 0.8, stagger: 0.06, ease: "power2.out" }, 1.1)
       .from(meta, { autoAlpha: 0, y: 24, duration: 1.2, stagger: 0.08 }, 0.9)
       .from(badge, { scale: 0, rotate: -120, duration: 1.4, ease: "back.out(1.6)" }, 1.2)
       .from(bbox, { scale: 1.18, autoAlpha: 0, duration: 0.9, ease: "power3.out" }, 1.5);
+
+    lines.forEach((line) => {
+      timeline
+        .from(
+          line.querySelectorAll<HTMLElement>("[data-hero-row-inner]"),
+          { xPercent: (_: number, el: HTMLElement) => (el.dataset.dir === "l" ? -14 : 14), duration: 1.8, stagger: 0.08 },
+          0.3,
+        )
+        .from(line.querySelectorAll("[data-word]"), { yPercent: 120, rotate: 6, duration: 1.4, stagger: 0.1 }, 0.35);
+    });
 
     if (score) {
       const counter = { value: 0.41 };
@@ -74,40 +124,32 @@ export function Hero() {
       if (!root || !isFinePointer() || prefersReducedMotion()) return;
 
       const tilt = root.querySelector("[data-hero-tilt]");
-      const text = root.querySelector("[data-hero-pointer-text]");
+      const texts = Array.from(root.querySelectorAll("[data-hero-pointer-text]"));
       const bloom = root.querySelector("[data-hero-bloom-move]");
-      if (!tilt || !text || !bloom) return;
+      if (!tilt || texts.length === 0 || !bloom) return;
 
-      const tiltX = gsap.quickTo(tilt, "rotationY", { duration: 1.2, ease: "expo.out" });
-      const tiltY = gsap.quickTo(tilt, "rotationX", { duration: 1.2, ease: "expo.out" });
       const moveTiltX = gsap.quickTo(tilt, "x", { duration: 1.2, ease: "expo.out" });
       const moveTiltY = gsap.quickTo(tilt, "y", { duration: 1.2, ease: "expo.out" });
-      const moveTextX = gsap.quickTo(text, "x", { duration: 1.6, ease: "expo.out" });
+      const moveTexts = texts.map((text) => gsap.quickTo(text, "x", { duration: 1.6, ease: "expo.out" }));
       const moveBloomX = gsap.quickTo(bloom, "x", { duration: 2.4, ease: "expo.out" });
       const moveBloomY = gsap.quickTo(bloom, "y", { duration: 2.4, ease: "expo.out" });
-
-      gsap.set(tilt, { transformPerspective: 900 });
 
       const handleMove = (event: PointerEvent) => {
         const bounds = root.getBoundingClientRect();
         const x = (event.clientX - bounds.left) / bounds.width - 0.5;
         const y = (event.clientY - bounds.top) / bounds.height - 0.5;
 
-        tiltX(x * 14);
-        tiltY(y * -10);
         moveTiltX(x * 40);
         moveTiltY(y * 30);
-        moveTextX(x * -30);
+        moveTexts.forEach((move) => move(x * -30));
         moveBloomX(x * 160);
         moveBloomY(y * 120);
       };
 
       const handleLeave = () => {
-        tiltX(0);
-        tiltY(0);
         moveTiltX(0);
         moveTiltY(0);
-        moveTextX(0);
+        moveTexts.forEach((move) => move(0));
         moveBloomX(0);
         moveBloomY(0);
       };
@@ -181,6 +223,50 @@ export function Hero() {
     },
     { scope },
   );
+
+  // Keeps the mint x-ray copy of the headline clipped exactly to wherever the portrait currently is.
+  useEffect(() => {
+    const root = scope.current;
+    const layer = xrayRef.current;
+    const figure = root?.querySelector<HTMLElement>("[data-hero-figure]");
+    const image = figure?.querySelector("img");
+    if (!root || !layer || !figure || !image) return;
+
+    const sync = () => {
+      const layerRect = layer.getBoundingClientRect();
+      if (layerRect.bottom < 0 || layerRect.top > window.innerHeight) return;
+      const imageRect = image.getBoundingClientRect();
+      layer.style.setProperty("--mx", `${imageRect.left - layerRect.left}px`);
+      layer.style.setProperty("--my", `${imageRect.top - layerRect.top}px`);
+      layer.style.setProperty("--mw", `${imageRect.width}px`);
+      layer.style.setProperty("--mh", `${imageRect.height}px`);
+      layer.style.opacity = getComputedStyle(figure).opacity;
+    };
+
+    sync();
+    gsap.ticker.add(sync);
+    return () => gsap.ticker.remove(sync);
+  }, []);
+
+  // The dreamy chromatic lens over the portrait, as on the NOVAIR hero.
+  useEffect(() => {
+    const root = scope.current;
+    const image = root?.querySelector<HTMLImageElement>("[data-hero-figure] img");
+    if (!root || !image || !isFinePointer() || prefersReducedMotion()) return;
+
+    let detach: (() => void) | undefined;
+    const start = () => {
+      detach = attachHeroLens(root, image);
+    };
+
+    if (image.complete && image.naturalWidth) start();
+    else image.addEventListener("load", start, { once: true });
+
+    return () => {
+      image.removeEventListener("load", start);
+      detach?.();
+    };
+  }, []);
 
   return (
     <section
@@ -295,38 +381,25 @@ export function Hero() {
           </div>
         </div>
 
-        <h1
-          className="gutter relative z-10 w-full text-white mix-blend-difference"
-          data-intro=""
-          data-hero-line=""
-          data-hero-pointer-text=""
+        <Headline />
+
+        <div
+          ref={xrayRef}
+          className="pointer-events-none absolute inset-0 z-20 flex items-center opacity-0"
+          style={{
+            WebkitMaskImage: `url(${media.hero})`,
+            maskImage: `url(${media.hero})`,
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            WebkitMaskSize: "var(--mw, 0px) var(--mh, 0px)",
+            maskSize: "var(--mw, 0px) var(--mh, 0px)",
+            WebkitMaskPosition: "var(--mx, 0px) var(--my, 0px)",
+            maskPosition: "var(--mx, 0px) var(--my, 0px)",
+          }}
+          aria-hidden="true"
         >
-          <span className={lineClass} data-hero-row="1">
-            <span className="block" data-hero-row-inner="">
-              <SplitWords text="Vedant" />
-            </span>
-          </span>
-
-          <span className="block text-right" data-hero-row="2">
-            <span className="inline-block" data-hero-row-inner="">
-              <SplitWords
-                text="Vardhaan"
-                className="inline-block pr-[2vw] font-serif text-[clamp(3rem,13.5vw,19rem)] font-normal italic leading-[0.86] tracking-[-0.03em]"
-              />
-            </span>
-          </span>
-
-          <span className={`${lineClass} relative pl-[8vw]`} data-hero-row="3">
-            <span className="eyebrow absolute left-[clamp(1.25rem,3.2vw,2.75rem)] top-[14%] hidden font-sans text-[0.7rem] font-normal leading-tight tracking-[0.14em] md:block">
-              AI
-              <br />
-              Systems
-            </span>
-            <span className="block" data-hero-row-inner="">
-              <SplitWords text="Engineer" />
-            </span>
-          </span>
-        </h1>
+          <Headline xray />
+        </div>
       </div>
 
       <div className="relative z-10" data-hero-fade="">

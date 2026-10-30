@@ -9,6 +9,7 @@ import { SplitWords } from "@/components/generals/split-words";
 import { RecLabel, Viewfinder } from "@/components/generals/viewfinder";
 import { Timecode } from "@/components/generals/timecode";
 import { experienceLogos } from "@/constants/media";
+import { orgAbout } from "@/constants/orgs";
 import { cn } from "@/lib/utils";
 
 const CAMS: { id: ExperienceGroupId; cam: string; tab: string }[] = [
@@ -121,6 +122,10 @@ function RoleRow({ e, index, open, onToggle }: RoleRowProps) {
               )}
             </div>
 
+            {orgAbout[e.company] && (
+              <p className="mb-6 max-w-md text-sm leading-relaxed text-bone/70 lg:hidden">{orgAbout[e.company]}</p>
+            )}
+
             <ol className="space-y-5">
               {e.bullets.map((bullet, bulletIndex) => (
                 <li
@@ -155,8 +160,73 @@ function RoleRow({ e, index, open, onToggle }: RoleRowProps) {
   );
 }
 
-function Monitor({ e, cam, groupLabel }: { e: ExperienceItem; cam: string; groupLabel: string }) {
+/** Logo first; after one scan sweep the logo lifts and a short "about" blurb fades in. Remounts per role. */
+function MonitorBody({ e }: { e: ExperienceItem }) {
   const logo = experienceLogos[e.company];
+  const about = orgAbout[e.company];
+  const [scans, setScans] = useState(0);
+  const showAbout = Boolean(about) && scans >= 1;
+
+  useEffect(() => {
+    if (prefersReducedMotion()) setScans(1);
+  }, []);
+
+  return (
+    <>
+      <span
+        onAnimationIteration={() => setScans((count) => count + 1)}
+        className="scan-line pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-flare/80 shadow-[0_0_12px_2px_rgba(212,107,255,0.5)]"
+        style={{ animationDuration: "2s" }}
+        aria-hidden="true"
+      />
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-10 animate-in fade-in zoom-in-95 duration-700">
+        <div
+          className={cn(
+            "flex flex-col items-center gap-6 transition-transform duration-1000 ease-expo",
+            showAbout && "-translate-y-[24%] scale-[0.86]",
+          )}
+        >
+          {logo ? (
+            <span className="flex size-52 items-center justify-center bg-bone p-6 shadow-2xl shadow-black/50 xl:size-60">
+              <img src={logo} alt={`${e.company} logo`} className="size-full object-contain" />
+            </span>
+          ) : (
+            <span className="eyebrow text-stone">No logo</span>
+          )}
+          <div className="text-center">
+            <p className="eyebrow text-bone">{e.period}</p>
+            {(e.location || e.meta) && (
+              <p className="eyebrow mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-stone">
+                {e.location && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="size-3" />
+                    {e.location}
+                  </span>
+                )}
+                {e.meta && <span>{e.meta}</span>}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {about && (
+          <div
+            className={cn(
+              "absolute inset-x-10 top-[63%] text-center transition-[opacity,translate] delay-300 duration-1000 ease-expo",
+              showAbout ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+            )}
+          >
+            <p className="eyebrow text-[0.6rem] text-flare">About</p>
+            <p className="mt-3 text-[0.92rem] leading-relaxed text-bone/85">{about}</p>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+function Monitor({ e, cam, groupLabel }: { e: ExperienceItem; cam: string; groupLabel: string }) {
   const live = isLive(e);
 
   return (
@@ -166,39 +236,13 @@ function Monitor({ e, cam, groupLabel }: { e: ExperienceItem; cam: string; group
         aria-hidden="true"
       />
       <Viewfinder />
-      <span
-        className="scan-line pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-flare/80 shadow-[0_0_12px_2px_rgba(212,107,255,0.5)]"
-        aria-hidden="true"
-      />
 
       <div className="eyebrow absolute inset-x-7 top-7 z-10 flex items-center justify-between text-[0.6rem] text-bone/90">
         <span>Cam {cam}</span>
         <Timecode />
       </div>
 
-      <div key={keyOf(e)} className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-10 animate-in fade-in zoom-in-95 duration-700">
-        {logo ? (
-          <span className="flex size-52 items-center justify-center bg-bone p-6 shadow-2xl shadow-black/50 xl:size-60">
-            <img src={logo} alt={`${e.company} logo`} className="size-full object-contain" />
-          </span>
-        ) : (
-          <span className="eyebrow text-stone">No logo</span>
-        )}
-        <div className="text-center">
-          <p className="eyebrow text-bone">{e.period}</p>
-          {(e.location || e.meta) && (
-            <p className="eyebrow mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-stone">
-              {e.location && (
-                <span className="inline-flex items-center gap-1.5">
-                  <MapPin className="size-3" />
-                  {e.location}
-                </span>
-              )}
-              {e.meta && <span>{e.meta}</span>}
-            </p>
-          )}
-        </div>
-      </div>
+      <MonitorBody key={keyOf(e)} e={e} />
 
       <div className="eyebrow absolute inset-x-7 bottom-7 z-10 flex items-center justify-between text-[0.6rem] text-bone/90">
         <span>{groupLabel}</span>
