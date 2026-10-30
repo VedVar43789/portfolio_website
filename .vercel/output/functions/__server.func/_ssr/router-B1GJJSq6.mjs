@@ -6,10 +6,10 @@ import { _ as createFileRoute, b as useRouter, d as Scripts, f as HeadContent, g
 import { n as require_jsx_runtime, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as Lenis } from "../_libs/lenis.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-D6TkTJBb.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-B1GJJSq6.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-x7c1hheL.css";
+var styles_default = "/assets/styles-B97Sw4U7.css";
 /** Smooth wheel scrolling (desktop) kept in sync with ScrollTrigger. Touch devices keep native scrolling. */
 function SmoothScroll({ children }) {
 	(0, import_react.useEffect)(() => {
@@ -312,7 +312,7 @@ function RootComponent() {
 		] })
 	});
 }
-var $$splitComponentImporter = () => import("./routes-B7-AY3sR.mjs");
+var $$splitComponentImporter = () => import("./routes-uop1Odsh.mjs");
 var rootRouteChildren = { IndexRoute: createFileRoute("/")({
 	head: () => ({ meta: [
 		{ title: "Vedant | AI Systems Engineer" },

@@ -6,7 +6,7 @@ import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.m
 import { a as Camera, i as Github, n as Send, o as ArrowUpRight, r as MapPin, s as ArrowDown, t as X } from "../_libs/lucide-react.mjs";
 import { t as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-B7-AY3sR.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-uop1Odsh.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -391,7 +391,7 @@ var PROJECTS = [...[
 			"Hugging Face"
 		],
 		github: "https://github.com/nathaniel-trueba/TumorSense",
-		demo: "https://tumorsense-n70xj8pny-ntrueba-5031s-projects.vercel.app/#developers",
+		demo: "https://tumorsense-production.up.railway.app",
 		tags: [
 			"ml",
 			"cv",
@@ -1113,6 +1113,321 @@ var projectAwards = {
 	},
 	"The Seismic Lottery": { label: "Best Project & People's Choice · DSC 106" }
 };
+/**
+* Chromatic "dreamy" lens for the hero portrait, ported from the NOVAIR reference.
+*
+* Around the pointer (a soft gaussian lens) the portrait is smeared outwards and split into a
+* red, green and blue spectrum. The portrait already has a transparent background, so the image
+* itself is the cutout and nothing behind the person is ever sampled. A transparent canvas sits
+* right above the <img>, eases in on hover, trails the pointer and eases out when it leaves.
+*/
+var EFFECT = {
+	size: .52,
+	strength: 140,
+	opacity: .8
+};
+var HOVER_AREA = {
+	left: .24,
+	right: .79,
+	top: 0,
+	bottom: 1
+};
+var VERTEX = `#version 300 es
+in vec2 a_position;
+out vec2 v_uv;
+
+void main() {
+    v_uv = vec2(a_position.x * 0.5 + 0.5, 0.5 - a_position.y * 0.5);
+    gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+var FRAGMENT = `#version 300 es
+precision highp float;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+uniform sampler2D u_media;
+uniform vec2 u_box;
+uniform vec2 u_drawn;
+uniform vec2 u_offset;
+uniform vec2 u_mouse;
+uniform float u_hover;
+uniform float u_size;
+uniform float u_strength;
+uniform float u_opacity;
+
+vec3 spectrum(float p) {
+    return 2.6 * vec3(
+        smoothstep(0.54, 0.24, p),
+        smoothstep(0.38, 0.0, abs(p - 0.5)),
+        smoothstep(0.47, 0.82, p)
+    );
+}
+
+vec4 sampleMedia(vec2 t) {
+    vec4 s = texture(u_media, clamp(t, 0.0, 1.0));
+    return vec4(s.rgb * s.a, s.a);
+}
+
+vec2 toAspect(vec2 uv, float aspect) {
+    return (uv * 2.0 - 1.0) * vec2(aspect, 1.0) / max(aspect, 1.0);
+}
+
+void main() {
+    vec2 t = v_uv;
+    vec2 b = (t * u_drawn + u_offset) / u_box;
+    float aspect = u_box.x / u_box.y;
+
+    vec2 relM = toAspect(b, aspect) - toAspect(u_mouse, aspect);
+    float sigma = max(u_size * 0.5, 0.02);
+    float fall = exp(-dot(relM, relM) / (2.0 * sigma * sigma));
+
+    float weight = u_hover * smoothstep(0.02, 0.35, fall) * u_opacity;
+    if (weight < 0.002) {
+        fragColor = vec4(0.0);
+        return;
+    }
+
+    vec2 dispBox = relM * fall * u_hover * u_strength / 1600.0;
+    vec2 disp = dispBox * u_box / u_drawn;
+
+    vec3 color = vec3(0.0);
+    vec3 total = vec3(0.0);
+    float alpha = 0.0;
+    float taps = 0.0;
+
+    for (int j = 0; j < 34; j++) {
+        float i = float(j) * 0.03;
+        if (i >= 1.0) break;
+        vec4 s = sampleMedia(t + disp * i);
+        vec3 w = spectrum(i);
+        color += s.rgb * w;
+        total += w;
+        alpha += s.a;
+        taps += 1.0;
+    }
+
+    color /= max(total, vec3(1e-4));
+    alpha = min(alpha / max(taps, 1.0), 1.0);
+
+    fragColor = vec4(clamp(color, 0.0, 1.0) * weight, alpha * weight);
+}`;
+var compile = (gl, type, source) => {
+	const shader = gl.createShader(type);
+	if (!shader) return null;
+	gl.shaderSource(shader, source);
+	gl.compileShader(shader);
+	if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+		gl.deleteShader(shader);
+		return null;
+	}
+	return shader;
+};
+var createRenderer = (width, height) => {
+	const canvas = document.createElement("canvas");
+	canvas.width = width;
+	canvas.height = height;
+	const gl = canvas.getContext("webgl2", {
+		alpha: true,
+		premultipliedAlpha: true,
+		antialias: false,
+		depth: false,
+		stencil: false,
+		preserveDrawingBuffer: true
+	});
+	if (!gl) return null;
+	const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX);
+	const fragment = compile(gl, gl.FRAGMENT_SHADER, FRAGMENT);
+	const program = gl.createProgram();
+	if (!vertex || !fragment || !program) return null;
+	gl.attachShader(program, vertex);
+	gl.attachShader(program, fragment);
+	gl.linkProgram(program);
+	if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return null;
+	const vao = gl.createVertexArray();
+	const buffer = gl.createBuffer();
+	if (!vao || !buffer) return null;
+	gl.bindVertexArray(vao);
+	gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+		-1,
+		-1,
+		3,
+		-1,
+		-1,
+		3
+	]), gl.STATIC_DRAW);
+	const position = gl.getAttribLocation(program, "a_position");
+	gl.enableVertexAttribArray(position);
+	gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+	gl.bindVertexArray(null);
+	return {
+		canvas,
+		gl,
+		program,
+		vao,
+		uniforms: Object.fromEntries([
+			"u_media",
+			"u_box",
+			"u_drawn",
+			"u_offset",
+			"u_mouse",
+			"u_hover",
+			"u_size",
+			"u_strength",
+			"u_opacity"
+		].map((name) => [name, gl.getUniformLocation(program, name)]))
+	};
+};
+/**
+* Adds the lens to the hero portrait. Returns a cleanup function, or a no-op when WebGL 2 is not available.
+* `root` receives the pointer; `image` is the portrait <img> (its parent must be positioned).
+*/
+var attachHeroLens = (root, image) => {
+	const width = Math.min(image.naturalWidth, 1200);
+	const height = Math.round(image.naturalHeight / image.naturalWidth * width);
+	const renderer = createRenderer(width, height);
+	if (!renderer || !image.parentElement) return () => void 0;
+	const { gl, canvas: shared, uniforms } = renderer;
+	const texture = gl.createTexture();
+	if (!texture) return () => void 0;
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+	gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+	gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	const overlay = document.createElement("canvas");
+	overlay.width = width;
+	overlay.height = height;
+	overlay.setAttribute("aria-hidden", "true");
+	overlay.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none;visibility:hidden;";
+	const context = overlay.getContext("2d");
+	if (!context) return () => void 0;
+	image.insertAdjacentElement("afterend", overlay);
+	const state = {
+		hovering: false,
+		ease: 0,
+		mouse: [.5, .5],
+		frame: 0,
+		last: 0
+	};
+	let pointer = null;
+	const frameFor = () => {
+		const boxWidth = overlay.offsetWidth;
+		const boxHeight = overlay.offsetHeight;
+		if (!boxWidth || !boxHeight) return null;
+		const scale = Math.min(boxWidth / width, boxHeight / height);
+		const drawnWidth = width * scale;
+		const drawnHeight = height * scale;
+		return {
+			box: [boxWidth, boxHeight],
+			drawn: [drawnWidth, drawnHeight],
+			offset: [(boxWidth - drawnWidth) / 2, (boxHeight - drawnHeight) / 2],
+			mouse: state.mouse,
+			hover: state.ease
+		};
+	};
+	const draw = () => {
+		const frame = frameFor();
+		if (!frame || gl.isContextLost()) return;
+		const boost = Math.min(2, Math.max(1, 800 / Math.max(frame.box[0], frame.box[1])));
+		gl.viewport(0, 0, width, height);
+		gl.disable(gl.BLEND);
+		gl.clearColor(0, 0, 0, 0);
+		gl.clear(gl.COLOR_BUFFER_BIT);
+		gl.useProgram(renderer.program);
+		gl.bindVertexArray(renderer.vao);
+		gl.activeTexture(gl.TEXTURE0);
+		gl.bindTexture(gl.TEXTURE_2D, texture);
+		gl.uniform1i(uniforms.u_media, 0);
+		gl.uniform2f(uniforms.u_box, Math.max(1, frame.box[0]), Math.max(1, frame.box[1]));
+		gl.uniform2f(uniforms.u_drawn, Math.max(1, frame.drawn[0]), Math.max(1, frame.drawn[1]));
+		gl.uniform2f(uniforms.u_offset, frame.offset[0], frame.offset[1]);
+		gl.uniform2f(uniforms.u_mouse, frame.mouse[0], frame.mouse[1]);
+		gl.uniform1f(uniforms.u_hover, frame.hover);
+		gl.uniform1f(uniforms.u_size, EFFECT.size);
+		gl.uniform1f(uniforms.u_strength, EFFECT.strength * boost);
+		gl.uniform1f(uniforms.u_opacity, EFFECT.opacity);
+		gl.drawArrays(gl.TRIANGLES, 0, 3);
+		gl.bindVertexArray(null);
+		context.clearRect(0, 0, width, height);
+		context.drawImage(shared, 0, shared.height - height, width, height, 0, 0, width, height);
+	};
+	const tick = (now) => {
+		const delta = state.last ? now - state.last : 1e3 / 60;
+		state.last = now;
+		const steps = Math.min(delta / 1e3 * 60, 3);
+		let moved = false;
+		const rect = overlay.getBoundingClientRect();
+		if (state.hovering && pointer && rect.width > 0 && rect.height > 0) {
+			const targetX = (pointer.x - rect.left) / rect.width;
+			const targetY = (pointer.y - rect.top) / rect.height;
+			if (state.ease < .02) state.mouse = [targetX, targetY];
+			else {
+				const follow = 1 - Math.pow(.8, steps);
+				const nextX = state.mouse[0] + (targetX - state.mouse[0]) * follow;
+				const nextY = state.mouse[1] + (targetY - state.mouse[1]) * follow;
+				moved = Math.abs(nextX - state.mouse[0]) + Math.abs(nextY - state.mouse[1]) > 5e-5;
+				state.mouse = [nextX, nextY];
+			}
+		}
+		const goal = state.hovering ? 1 : 0;
+		const previous = state.ease;
+		state.ease += (goal - state.ease) * (1 - Math.pow(.85, steps));
+		if (!state.hovering && state.ease < .004) {
+			state.ease = 0;
+			context.clearRect(0, 0, width, height);
+			overlay.style.visibility = "hidden";
+			state.frame = 0;
+			state.last = 0;
+			return;
+		}
+		if (moved || Math.abs(state.ease - previous) > 5e-4) draw();
+		state.frame = window.requestAnimationFrame(tick);
+	};
+	const start = () => {
+		if (state.frame) return;
+		state.last = 0;
+		state.frame = window.requestAnimationFrame(tick);
+	};
+	const insideLens = (x, y) => {
+		const rect = overlay.getBoundingClientRect();
+		if (rect.width <= 0 || rect.height <= 0) return false;
+		const u = (x - rect.left) / rect.width;
+		const v = (y - rect.top) / rect.height;
+		return u >= HOVER_AREA.left && u <= HOVER_AREA.right && v >= HOVER_AREA.top && v <= HOVER_AREA.bottom;
+	};
+	const handleMove = (event) => {
+		if (event.pointerType !== "mouse" && event.pointerType !== "pen") return;
+		pointer = {
+			x: event.clientX,
+			y: event.clientY
+		};
+		const next = insideLens(pointer.x, pointer.y);
+		if (next && !state.hovering) overlay.style.visibility = "visible";
+		state.hovering = next;
+		if (next || state.ease > 0) start();
+	};
+	const handleLeave = () => {
+		pointer = null;
+		state.hovering = false;
+		start();
+	};
+	root.addEventListener("pointermove", handleMove, { passive: true });
+	root.addEventListener("pointerleave", handleLeave);
+	window.addEventListener("blur", handleLeave);
+	return () => {
+		window.cancelAnimationFrame(state.frame);
+		root.removeEventListener("pointermove", handleMove);
+		root.removeEventListener("pointerleave", handleLeave);
+		window.removeEventListener("blur", handleLeave);
+		overlay.remove();
+		gl.deleteTexture(texture);
+	};
+};
 var scatterCards = [
 	{
 		image: projectCovers["PantryPal, Smart Recipe Recommender"],
@@ -1164,16 +1479,67 @@ var scatterCards = [
 	}
 ];
 var lineClass = "block font-wide text-[clamp(2.6rem,12vw,17rem)] font-semibold uppercase leading-[0.8] tracking-[-0.055em]";
+/** The big name. Rendered twice: once as the white blended title, once as the mint x-ray copy clipped to the portrait. */
+function Headline({ xray = false }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(xray ? "div" : "h1", {
+		className: cn("gutter relative w-full", xray ? "text-[#a6e8c4]" : "z-10 text-white mix-blend-difference"),
+		"data-intro": "",
+		"data-hero-line": "",
+		"data-hero-pointer-text": "",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: lineClass,
+				"data-hero-row": "1",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "block",
+					"data-hero-row-inner": "",
+					"data-dir": "l",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SplitWords, { text: "Vedant" })
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "block text-right",
+				"data-hero-row": "2",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "inline-block",
+					"data-hero-row-inner": "",
+					"data-dir": "r",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SplitWords, {
+						text: "Vardhaan",
+						className: "inline-block pr-[2vw] font-serif text-[clamp(3rem,13.5vw,19rem)] font-normal italic leading-[0.86] tracking-[-0.03em]"
+					})
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+				className: `${lineClass} relative pl-[8vw]`,
+				"data-hero-row": "3",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+					className: "eyebrow absolute left-[clamp(1.25rem,3.2vw,2.75rem)] top-[14%] hidden font-sans text-[0.7rem] font-normal leading-tight tracking-[0.14em] md:block",
+					children: [
+						"AI",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+						"Systems"
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "block",
+					"data-hero-row-inner": "",
+					"data-dir": "l",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SplitWords, { text: "Engineer" })
+				})]
+			})
+		]
+	});
+}
 function Hero() {
 	const scope = (0, import_react.useRef)(null);
+	const xrayRef = (0, import_react.useRef)(null);
 	useIntro(scope, (timeline, root) => {
-		const words = root.querySelectorAll("[data-hero-line] [data-word]");
+		const lines = root.querySelectorAll("[data-hero-line]");
 		const frame = root.querySelector("[data-hero-frame]");
 		const figure = root.querySelector("[data-hero-figure]");
 		const bbox = root.querySelector("[data-hero-bbox]");
 		const meta = root.querySelectorAll("[data-hero-meta]");
 		const hud = root.querySelectorAll("[data-hero-hud]");
-		const rows = root.querySelectorAll("[data-hero-row-inner]");
 		const bloom = root.querySelector("[data-hero-bloom]");
 		const badge = root.querySelector("[data-hero-badge]");
 		const score = root.querySelector("[data-hero-score]");
@@ -1195,16 +1561,7 @@ function Hero() {
 			autoAlpha: 0,
 			duration: 1.8,
 			ease: "expo.out"
-		}, .5).from(rows, {
-			xPercent: (index) => index % 2 === 0 ? -14 : 14,
-			duration: 1.8,
-			stagger: .08
-		}, .3).from(words, {
-			yPercent: 120,
-			rotate: 6,
-			duration: 1.4,
-			stagger: .1
-		}, .35).from(hud, {
+		}, .5).from(hud, {
 			autoAlpha: 0,
 			duration: .8,
 			stagger: .06,
@@ -1225,6 +1582,18 @@ function Hero() {
 			duration: .9,
 			ease: "power3.out"
 		}, 1.5);
+		lines.forEach((line) => {
+			timeline.from(line.querySelectorAll("[data-hero-row-inner]"), {
+				xPercent: (_, el) => el.dataset.dir === "l" ? -14 : 14,
+				duration: 1.8,
+				stagger: .08
+			}, .3).from(line.querySelectorAll("[data-word]"), {
+				yPercent: 120,
+				rotate: 6,
+				duration: 1.4,
+				stagger: .1
+			}, .35);
+		});
 		if (score) {
 			const counter = { value: .41 };
 			timeline.to(counter, {
@@ -1241,17 +1610,9 @@ function Hero() {
 		const root = scope.current;
 		if (!root || !isFinePointer() || prefersReducedMotion()) return;
 		const tilt = root.querySelector("[data-hero-tilt]");
-		const text = root.querySelector("[data-hero-pointer-text]");
+		const texts = Array.from(root.querySelectorAll("[data-hero-pointer-text]"));
 		const bloom = root.querySelector("[data-hero-bloom-move]");
-		if (!tilt || !text || !bloom) return;
-		const tiltX = gsapWithCSS.quickTo(tilt, "rotationY", {
-			duration: 1.2,
-			ease: "expo.out"
-		});
-		const tiltY = gsapWithCSS.quickTo(tilt, "rotationX", {
-			duration: 1.2,
-			ease: "expo.out"
-		});
+		if (!tilt || texts.length === 0 || !bloom) return;
 		const moveTiltX = gsapWithCSS.quickTo(tilt, "x", {
 			duration: 1.2,
 			ease: "expo.out"
@@ -1260,10 +1621,10 @@ function Hero() {
 			duration: 1.2,
 			ease: "expo.out"
 		});
-		const moveTextX = gsapWithCSS.quickTo(text, "x", {
+		const moveTexts = texts.map((text) => gsapWithCSS.quickTo(text, "x", {
 			duration: 1.6,
 			ease: "expo.out"
-		});
+		}));
 		const moveBloomX = gsapWithCSS.quickTo(bloom, "x", {
 			duration: 2.4,
 			ease: "expo.out"
@@ -1272,25 +1633,20 @@ function Hero() {
 			duration: 2.4,
 			ease: "expo.out"
 		});
-		gsapWithCSS.set(tilt, { transformPerspective: 900 });
 		const handleMove = (event) => {
 			const bounds = root.getBoundingClientRect();
 			const x = (event.clientX - bounds.left) / bounds.width - .5;
 			const y = (event.clientY - bounds.top) / bounds.height - .5;
-			tiltX(x * 14);
-			tiltY(y * -10);
 			moveTiltX(x * 40);
 			moveTiltY(y * 30);
-			moveTextX(x * -30);
+			moveTexts.forEach((move) => move(x * -30));
 			moveBloomX(x * 160);
 			moveBloomY(y * 120);
 		};
 		const handleLeave = () => {
-			tiltX(0);
-			tiltY(0);
 			moveTiltX(0);
 			moveTiltY(0);
-			moveTextX(0);
+			moveTexts.forEach((move) => move(0));
 			moveBloomX(0);
 			moveBloomY(0);
 		};
@@ -1353,6 +1709,41 @@ function Hero() {
 		});
 		return () => mm.revert();
 	}, { scope });
+	(0, import_react.useEffect)(() => {
+		const root = scope.current;
+		const layer = xrayRef.current;
+		const figure = root?.querySelector("[data-hero-figure]");
+		const image = figure?.querySelector("img");
+		if (!root || !layer || !figure || !image) return;
+		const sync = () => {
+			const layerRect = layer.getBoundingClientRect();
+			if (layerRect.bottom < 0 || layerRect.top > window.innerHeight) return;
+			const imageRect = image.getBoundingClientRect();
+			layer.style.setProperty("--mx", `${imageRect.left - layerRect.left}px`);
+			layer.style.setProperty("--my", `${imageRect.top - layerRect.top}px`);
+			layer.style.setProperty("--mw", `${imageRect.width}px`);
+			layer.style.setProperty("--mh", `${imageRect.height}px`);
+			layer.style.opacity = getComputedStyle(figure).opacity;
+		};
+		sync();
+		gsapWithCSS.ticker.add(sync);
+		return () => gsapWithCSS.ticker.remove(sync);
+	}, []);
+	(0, import_react.useEffect)(() => {
+		const root = scope.current;
+		const image = root?.querySelector("[data-hero-figure] img");
+		if (!root || !image || !isFinePointer() || prefersReducedMotion()) return;
+		let detach;
+		const start = () => {
+			detach = attachHeroLens(root, image);
+		};
+		if (image.complete && image.naturalWidth) start();
+		else image.addEventListener("load", start, { once: true });
+		return () => {
+			image.removeEventListener("load", start);
+			detach?.();
+		};
+	}, []);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		ref: scope,
 		id: "top",
@@ -1502,50 +1893,22 @@ function Hero() {
 							})
 						})
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
-						className: "gutter relative z-10 w-full text-white mix-blend-difference",
-						"data-intro": "",
-						"data-hero-line": "",
-						"data-hero-pointer-text": "",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: lineClass,
-								"data-hero-row": "1",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "block",
-									"data-hero-row-inner": "",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SplitWords, { text: "Vedant" })
-								})
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "block text-right",
-								"data-hero-row": "2",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "inline-block",
-									"data-hero-row-inner": "",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SplitWords, {
-										text: "Vardhaan",
-										className: "inline-block pr-[2vw] font-serif text-[clamp(3rem,13.5vw,19rem)] font-normal italic leading-[0.86] tracking-[-0.03em]"
-									})
-								})
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: `${lineClass} relative pl-[8vw]`,
-								"data-hero-row": "3",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "eyebrow absolute left-[clamp(1.25rem,3.2vw,2.75rem)] top-[14%] hidden font-sans text-[0.7rem] font-normal leading-tight tracking-[0.14em] md:block",
-									children: [
-										"AI",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
-										"Systems"
-									]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "block",
-									"data-hero-row-inner": "",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SplitWords, { text: "Engineer" })
-								})]
-							})
-						]
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Headline, {}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						ref: xrayRef,
+						className: "pointer-events-none absolute inset-0 z-20 flex items-center opacity-0",
+						style: {
+							WebkitMaskImage: `url(${media.hero})`,
+							maskImage: `url(${media.hero})`,
+							WebkitMaskRepeat: "no-repeat",
+							maskRepeat: "no-repeat",
+							WebkitMaskSize: "var(--mw, 0px) var(--mh, 0px)",
+							maskSize: "var(--mw, 0px) var(--mh, 0px)",
+							WebkitMaskPosition: "var(--mx, 0px) var(--my, 0px)",
+							maskPosition: "var(--mx, 0px) var(--my, 0px)"
+						},
+						"aria-hidden": "true",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Headline, { xray: true })
 					})
 				]
 			}),
@@ -2094,6 +2457,21 @@ function About() {
 		]
 	});
 }
+/** Two plain-language sentences per organisation, shown in the experience monitor after two scans. Keyed by the company name in data.ts. */
+var orgAbout = {
+	"PricewaterhouseCoopers LLP (PwC)": "PwC is one of the world's largest professional services networks, known for audit, tax and consulting. Its technology consulting teams help clients adopt cloud and AI.",
+	Oaken: "Oaken is an Indiana agtech software company that helps farm operators manage leases, finances and relationships with the landowners they farm for. Its platform keeps landowner records in one place and turns them into clear reports.",
+	UniCircle: "UniCircle is a student platform that helps university students find campus communities, events and opportunities. It runs on a web app with a privacy-focused backend built to FERPA and CCPA requirements.",
+	"Metro Infrasys": "Metro Infrasys is an Indian intelligent transportation systems company focused on tolling, traffic management and parking. Its systems help highway operators monitor roads and collect tolls.",
+	"UCSD CSE (STSLab)": "STSLab is a research group in UC San Diego's Computer Science and Engineering department. Its work with Prof. Deepak Kumar studies online behavior, including whether AI chatbots can reduce toxic discourse.",
+	"Engineers for Exploration (E4E)": "Engineers for Exploration is a student-led UC San Diego program where interdisciplinary teams build technology for conservation and exploration. Its mangrove project works with Scripps Institution of Oceanography to map mangroves from drones and satellites.",
+	"IIT Guwahati": "IIT Guwahati is a public technical university in Assam, India, and one of the Indian Institutes of Technology. It is known for engineering and science research.",
+	"CSES Open Source, TritonSpend": "CSES is UC San Diego's Computer Science and Engineering Society, and its Open Source program has students build real projects together. One of them is TritonSpend, a finance app for UCSD students to track budgets and expenses.",
+	"UCSD Eighth College": "Eighth College is UC San Diego's newest undergraduate residential college, built around the theme of engagement and community. Resident assistants support the students living in its residence halls.",
+	"DS3, Data Science Student Society": "DS3 is UC San Diego's Data Science Student Society, a student organization for learning and building with data. It runs quarterly team projects with mentors and ends each quarter with a showcase.",
+	"Halicioglu Data Science Institute, UCSD": "The Halicioglu Data Science Institute is UC San Diego's home for data science education and research. It teaches the data science major and courses such as DSC 40A.",
+	"Triton Quantitative Trading (TQT)": "TQT is a UC San Diego student organization focused on quantitative finance and algorithmic trading. Members build statistical and trading models and compete in trading contests."
+};
 var CAMS = [
 	{
 		id: "industry",
@@ -2213,6 +2591,10 @@ function RoleRow({ e, index, open, onToggle }) {
 								}), e.meta && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: e.meta })]
 							})]
 						}),
+						orgAbout[e.company] && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mb-6 max-w-md text-sm leading-relaxed text-bone/70 lg:hidden",
+							children: orgAbout[e.company]
+						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
 							className: "space-y-5",
 							children: e.bullets.map((bullet, bulletIndex) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
@@ -2241,8 +2623,60 @@ function RoleRow({ e, index, open, onToggle }) {
 		})]
 	});
 }
-function Monitor({ e, cam, groupLabel }) {
+/** Logo first; after one scan sweep the logo lifts and a short "about" blurb fades in. Remounts per role. */
+function MonitorBody({ e }) {
 	const logo = experienceLogos[e.company];
+	const about = orgAbout[e.company];
+	const [scans, setScans] = (0, import_react.useState)(0);
+	const showAbout = Boolean(about) && scans >= 1;
+	(0, import_react.useEffect)(() => {
+		if (prefersReducedMotion()) setScans(1);
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		onAnimationIteration: () => setScans((count) => count + 1),
+		className: "scan-line pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-flare/80 shadow-[0_0_12px_2px_rgba(212,107,255,0.5)]",
+		style: { animationDuration: "2s" },
+		"aria-hidden": "true"
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "absolute inset-0 flex flex-col items-center justify-center px-10 animate-in fade-in zoom-in-95 duration-700",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: cn("flex flex-col items-center gap-6 transition-transform duration-1000 ease-expo", showAbout && "-translate-y-[24%] scale-[0.86]"),
+			children: [logo ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "flex size-52 items-center justify-center bg-bone p-6 shadow-2xl shadow-black/50 xl:size-60",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+					src: logo,
+					alt: `${e.company} logo`,
+					className: "size-full object-contain"
+				})
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "eyebrow text-stone",
+				children: "No logo"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "text-center",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "eyebrow text-bone",
+					children: e.period
+				}), (e.location || e.meta) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+					className: "eyebrow mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-stone",
+					children: [e.location && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "inline-flex items-center gap-1.5",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapPin, { className: "size-3" }), e.location]
+					}), e.meta && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: e.meta })]
+				})]
+			})]
+		}), about && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: cn("absolute inset-x-10 top-[63%] text-center transition-[opacity,translate] delay-300 duration-1000 ease-expo", showAbout ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"),
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "eyebrow text-[0.6rem] text-flare",
+				children: "About"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "mt-3 text-[0.92rem] leading-relaxed text-bone/85",
+				children: about
+			})]
+		})]
+	})] });
+}
+function Monitor({ e, cam, groupLabel }) {
 	const live = isLive(e);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "frame-grid relative aspect-[4/5] w-full overflow-hidden border border-bone/10 bg-ink-raised",
@@ -2252,40 +2686,11 @@ function Monitor({ e, cam, groupLabel }) {
 				"aria-hidden": "true"
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewfinder, {}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "scan-line pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-flare/80 shadow-[0_0_12px_2px_rgba(212,107,255,0.5)]",
-				"aria-hidden": "true"
-			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "eyebrow absolute inset-x-7 top-7 z-10 flex items-center justify-between text-[0.6rem] text-bone/90",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["Cam ", cam] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Timecode, {})]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "absolute inset-0 flex flex-col items-center justify-center gap-6 px-10 animate-in fade-in zoom-in-95 duration-700",
-				children: [logo ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "flex size-52 items-center justify-center bg-bone p-6 shadow-2xl shadow-black/50 xl:size-60",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-						src: logo,
-						alt: `${e.company} logo`,
-						className: "size-full object-contain"
-					})
-				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "eyebrow text-stone",
-					children: "No logo"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "text-center",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "eyebrow text-bone",
-						children: e.period
-					}), (e.location || e.meta) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						className: "eyebrow mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-stone",
-						children: [e.location && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							className: "inline-flex items-center gap-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapPin, { className: "size-3" }), e.location]
-						}), e.meta && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: e.meta })]
-					})]
-				})]
-			}, keyOf(e)),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MonitorBody, { e }, keyOf(e)),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "eyebrow absolute inset-x-7 bottom-7 z-10 flex items-center justify-between text-[0.6rem] text-bone/90",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: groupLabel }), live ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RecLabel, {
