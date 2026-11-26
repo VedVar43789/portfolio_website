@@ -6,7 +6,7 @@ import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.m
 import { a as Camera, i as Github, n as Send, o as ArrowUpRight, r as MapPin, s as ArrowDown, t as X } from "../_libs/lucide-react.mjs";
 import { t as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-uop1Odsh.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CSpoxHCr.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LINKS = {
@@ -138,14 +138,15 @@ var EXPERIENCE = [
 		group: "industry",
 		sortKey: 90,
 		bullets: [
-			"Owned all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel).",
-			"Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL.",
-			"Led engineering contributors, code review, CI/CD, and the technical roadmap with the CEO."
+			"Owned the technical architecture of unicircle.app (React/TypeScript, Supabase, Vercel), including a real-time recruitment pipeline for club officers secured with PostgreSQL row-level security for FERPA/CCPA-compliant data handling.",
+			"Built a data ingestion pipeline that aggregated club and event data from university directories, Instagram, and Eventbrite, populating the directory with 400+ student organizations, plus 30+ edge functions for AI club matching and applicant screening.",
+			"Led a team of 2 developers and partnered with the CEO on product strategy and roadmap; pitched to clubs at tabling events and grew the platform to ~50 beta users."
 		],
 		tags: [
 			"React",
 			"TypeScript",
 			"Supabase",
+			"PostgreSQL",
 			"Vercel"
 		]
 	},
