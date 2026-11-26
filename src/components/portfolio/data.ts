@@ -113,11 +113,11 @@ export const EXPERIENCE: Experience[] = [
     group: "industry",
     sortKey: 90,
     bullets: [
-      "Owned all technical architecture and infrastructure for unicircle.app (React/TypeScript, Supabase, Vercel).",
-      "Designed a FERPA/CCPA-compliant backend with Supabase Edge Functions and PostgreSQL.",
-      "Led engineering contributors, code review, CI/CD, and the technical roadmap with the CEO.",
+      "Owned the technical architecture of unicircle.app (React/TypeScript, Supabase, Vercel), including a real-time recruitment pipeline for club officers secured with PostgreSQL row-level security for FERPA/CCPA-compliant data handling.",
+      "Built a data ingestion pipeline that aggregated club and event data from university directories, Instagram, and Eventbrite, populating the directory with 400+ student organizations, plus 30+ edge functions for AI club matching and applicant screening.",
+      "Led a team of 2 developers and partnered with the CEO on product strategy and roadmap; pitched to clubs at tabling events and grew the platform to ~50 beta users.",
     ],
-    tags: ["React", "TypeScript", "Supabase", "Vercel"],
+    tags: ["React", "TypeScript", "Supabase", "PostgreSQL", "Vercel"],
   },
   {
     role: "Software Engineer Intern (Computer Vision)",
